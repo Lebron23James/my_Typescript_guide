@@ -5,6 +5,6 @@
   * 1.0 introduction
 * [2.变量声明](2bian-liang-sheng-ming.md)
 * 3.接口
-* 4.类
-* 5.函数
+* [4.类](4lei.md)
+* [5.函数](5han-shu.md)
 
