@@ -42,5 +42,17 @@ name = "smith";
     let sentence: string = ` Hello, my name is ${name}
                              I am ${age} years old;  `
 
+4、数组
+
+TypeScript 和 JavaScript一样可以操作数组元素。 有两种方式可以定义数组：
+
+第一种： 在元素类型后面接上\[ \]； 表示有此类型元素组成的一个数组；
+
+```
+let list:number[] = [1, 2, 3];
+```
+
+第二种： 使用数组泛型， **Array&lt;元素类型&gt;**
+
 
 
