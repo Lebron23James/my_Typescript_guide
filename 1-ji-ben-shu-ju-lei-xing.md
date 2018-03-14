@@ -39,7 +39,7 @@ name = "smith";
     let name: string = "janny";
     let age: number = 23;
 
-    let sentence: string = ` Hello, my name is ${name}
+    let sentence: string = ` Hello, my name is ${name}，
                              I am ${age} years old;  `
 
 4、数组
@@ -58,7 +58,7 @@ let list:number[] = [1, 2, 3];
 let list: Array<number> = [1, 2, 3];
 ```
 
-5、元组 Tuple
+5、元组 **Tuple**
 
 元组类型表示一个一直元素数量和类型数组，其中各元素的类型不必相同。
 
@@ -68,7 +68,23 @@ x = ["hello", 10];         //true
 x = [10, "hello"];         //false
 ```
 
+当访问一个已知索引的类型，会得到正确的值。
 
+```
+console.log(x[0].substr(1));  // OK
+console.log(x[1].substr(1));  // Error  number类型没有substr 方法
+```
 
+当访问一个越界元素的时候，回使用联合类型代替。
 
+```
+x[3] = "world";  //OK 字符串可以赋值给（string | number）类型
+x[5].toString();  //OK String和number都有toString方法
+x[6] = true;      //Error, 布尔不是（string | number）类型
+
+```
+
+6、枚举**enum**
+
+枚举类型是对JavaScript标准数据类型的一个补充，可以为一组数值赋予友好的名字。 
 
