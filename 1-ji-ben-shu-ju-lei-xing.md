@@ -12,8 +12,6 @@ TypeScript 除了支持JavaScript 中所有的数据类型之外，还提供了�
 let isDone:boolean = false;
 ```
 
-
-
 2、数字
 
 在TypeScript 和 JavaScript中所有的数字都是浮点数，这些浮点数的类型是** number**。
@@ -27,8 +25,6 @@ let binaryLiteral: number = 0b1010;
 let octalLiteral: number = 0o774;
 ```
 
-
-
 3、字符串
 
 在TypeScript 和 JavaScript中所有文本数据类型用**string **表示；使用单引号（‘’）或者双引号（“”）来表示。
@@ -38,5 +34,13 @@ let name:string = "Bob";
 name = "smith";
 ```
 
-还可以使用模板字符串
+还可以使用模板字符串【定义多行文本和内嵌表达式】；
+
+    let name: string = "janny";
+    let age: number = 23;
+
+    let sentence: string = ` Hello, my name is ${name}
+                             I am ${age} years old;  `
+
+
 
