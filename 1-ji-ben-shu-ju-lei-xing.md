@@ -46,13 +46,29 @@ name = "smith";
 
 TypeScript 和 JavaScript一样可以操作数组元素。 有两种方式可以定义数组：
 
-第一种： 在元素类型后面接上\[ \]； 表示有此类型元素组成的一个数组；
+第一种： 在元素类型后面接上\[ \]； 表示有此类型元素组成的一个数组
 
 ```
 let list:number[] = [1, 2, 3];
 ```
 
 第二种： 使用数组泛型， **Array&lt;元素类型&gt;**
+
+```
+let list: Array<number> = [1, 2, 3];
+```
+
+5、元组 Tuple
+
+元组类型表示一个一直元素数量和类型数组，其中各元素的类型不必相同。
+
+```
+let x: [string, number];   //定义一对值分别为string和number类型的元组
+x = ["hello", 10];         //true
+x = [10, "hello"];         //false
+```
+
+
 
 
 
