@@ -46,13 +46,13 @@ name = "smith";
 
 TypeScript 和 JavaScript一样可以操作数组元素。 有两种方式可以定义数组：
 
-第一种： 在元素类型后面接上\[ \]； 表示有此类型元素组成的一个数组
+> 第一种： 在元素类型后面接上\[ \]； 表示有此类型元素组成的一个数组
 
 ```
 let list:number[] = [1, 2, 3];
 ```
 
-第二种： 使用数组泛型， **Array&lt;元素类型&gt;**
+> 第二种： 使用数组泛型， **Array&lt;元素类型&gt;**
 
 ```
 let list: Array<number> = [1, 2, 3];
@@ -139,7 +139,7 @@ prerrySure.toFixed();  //Error
 
 ```
 let list:any[] = [4, true, "srring"];
-list[1] = 100;  //OK  
+list[1] = 100;  //OK
 ```
 
 ### 8、void
@@ -192,7 +192,6 @@ function fail(): never {
 function infinitLoop(): never {
    while(true) {}
 }
-
 ```
 
 ### 11、类型断言
@@ -201,5 +200,21 @@ function infinitLoop(): never {
 
 类型断言好比其他语言里的类型转换，但是不进行特殊的类型检查和结构。他没有运行时的影响，知识在编译阶段起作用。TypeScript会假设你已经进行了必要的检查。
 
+类型断言有两种形式，
 
+> 第一种：尖括号语法
+
+```
+let someValue: any = "this is a string";
+let stringLength: number = (<string>someValue).length;
+```
+
+> 第二种：as语法
+
+```
+let someValue: any = "this is a string";
+let stringLength: number = (someValue as string).length;
+```
+
+这两种形式是等价的，但是当你在TypeScript里使用JSX时，只有as语法的断言是被允许的。
 
