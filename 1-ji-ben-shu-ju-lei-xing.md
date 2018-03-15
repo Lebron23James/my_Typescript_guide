@@ -81,10 +81,47 @@ console.log(x[1].substr(1));  // Error  number类型没有substr 方法
 x[3] = "world";  //OK 字符串可以赋值给（string | number）类型
 x[5].toString();  //OK String和number都有toString方法
 x[6] = true;      //Error, 布尔不是（string | number）类型
-
 ```
 
 6、枚举**enum**
 
-枚举类型是对JavaScript标准数据类型的一个补充，可以为一组数值赋予友好的名字。 
+枚举类型是对JavaScript标准数据类型的一个补充，可以为一组数值赋予友好的名字。
+
+```
+enum Color {red, green, blue}
+let c:Color = Color.green;
+```
+
+默认的从0开始编号，也可以手动为成员指定数值。
+
+```
+enum Color {red=1, green, blue}
+let c:Color = Color.green;
+```
+
+也可以全部采用手动赋值。
+
+```
+enum Color {red=1, green=2, blue=4}
+let c:Color = Color.green;
+```
+
+枚举类型提供了一个便利：他可以通过枚举成员的数值来得到它的名字。
+
+```
+enum Color {red=1, green=2, blue=4}
+let colorName:string = Color[2];   // green 
+```
+
+7、Any
+
+有时候，我们想要为那些在编译阶段还不清楚类型的变量指定一个类型。 这种情况下我们不希望类型检查器对这些值进行类型检查，而是直接让他们通过编译阶段的检查。此时可以使用any类型来标记这些变量。
+
+```
+let notSure:any = 4;
+notSure = "I am string"; //OK
+notSure = false;   //OK
+```
+
+
 
