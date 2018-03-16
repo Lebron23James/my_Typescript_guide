@@ -271,7 +271,7 @@ let myArray:ReadonlyStringArray = ["aaa", "bbb"];
 myArray[2] = "ccc";   //error
 ```
 
-7、接口描述 -- 类类型
+## 7、接口描述 -- 类类型
 
 TypeScript 也可以用接口来明确的强制一个类去符合某种契约。
 
@@ -292,15 +292,59 @@ class Clock implements ClockInterface {
 }
 ```
 
+接口描述了类的公共部分，不是公共和私有两部分；它不会帮你检查类是否有某些私有成员。
 
+> #### 类的静态部分 与 实例部分的区别
 
+## 8、接口继承
 
+接口和类一样也可以实现相互继承。这让我们能从一个成员里复制成员到另一个接口，可以更灵活的将接口分割到可重用的模快里。
 
+```
+interface Shape {
+    color: string;
+}
+interface Square extends Shape {
+    sideLength: number;
+}
 
+let square = <Square>{};
+square.color = "blue";
+square.sideLength = 10;
+```
 
+一个接口可以继承多个接口，创建出多个接口的合成接口。
 
+```
+interface Shape {
+    color: string;
+}
+interface PenStroke {
+    penWidth: number;
+}
+interface Square extends Shape, PenStroke {
+    sideLength: number;
+}
 
+let square = <Square>{};
+square.color = "blue";
+square.penWidth = 10;
+square.sideLength = 5.0;
+```
 
+## 9、混合类型
 
+接口能够描述JavaScript里丰富的类型。有时你希望一个对象能够具有上面提到的多种类型。
 
+以下是一个例子：一个对象可以同时作为函数和对象使用，并带有额外的属性。
+
+```
+
+```
+
+使用第三方库的时候，你可能需要像上面那样完整的定义类型。
+
+## 10、接口继承类
+
+当接口继承一个类类型时，他会继承类的成员，但是不包括其实现。
 
