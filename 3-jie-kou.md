@@ -64,7 +64,7 @@ let mySquare = createSquare({color: "black"});
 可选属性的好处：
 
 > （1）对可能存在的属性进行预定义；
-
+>
 > （2）可以捕获引用了不存在的属性时的错误。
 
 例如： 我们故意将createSquaer 里面的属性名拼错，就回得到一个错误提示。
@@ -166,6 +166,130 @@ interface SquareConfig {
 ```
 let squaerOptions = { width:100, height:50 };
 let mySquare = createSquare(squaerOptions);
+```
+
+## 5、接口描述 -- 函数类型
+
+为了使用接口表示函数类型，我们需要给接口定义一个**调用签名**。
+
+> 它就像一个只有参数列表和返回值类型 的函数定义； 参数列表里的每个参数都需要名字和类型。
+
+```
+interface searchFunc {
+    (source: string, substr: string): boolean;
+}
+```
+
+这样定义之后我们就可以像使用其他接口一样使用这个函数类型的接口。
+
+```
+let mySearch = searchFunc ;
+mySearch = function(source: string, substr: string):boolean {
+    let result = source.search(substr);
+    return result > -1 ;
+}
+```
+
+对于函数的类型检查来说，函数的参数名不需要与接口里定义的名字相匹配。
+
+```
+let mySearch = searchFunc ;
+mySearch = function(src: string, sub: string):boolean {
+    let result = source.search(substr);
+    return result > -1 ;
+}
+```
+
+函数的参数会逐个进行检查，要求对应位置上的参数类型是兼容的。若不指定类型，TS的类型系统会推断出参数类型。
+
+函数的返回值类型也是通过返回值推断出来的（此处为true或false）；若函数返回数字或字符串，类型检查器会发出警告。
+
+```
+let mySearch: SearchFunc;
+mySearch = function(src, sub) {
+    let result = src.search(sub);
+    return result > -1;
+}
+```
+
+## 6、接口描述 -- 可索引类型
+
+可索引类型：具有一个**索引签名**，它描述了对象索引的类型，还有相应索引返回的类型。
+
+```
+interface stringArray {
+    [index: number] : string;      //number 类型的索引签名
+}
+let myArray: stringArray;
+myArray = ["sos", "bob"];
+
+let myStr: string = myArray[0];   //表示用number去索引具有stringArray接口的可遍历结构时，会得到string类型的返回值
+```
+
+> #### 索引签名有两种类型： 数字 和 字符串
+
+可以同时使用两种类型的索引，但是数字索引的返回值必须是字符串索引返回值类型的子类型。
+
+因为当使用number 来索引时，js会将它转变成string，然后再去索引对象。
+
+也就是100去索引等同于“100”去索引，因此两者需保持一致。
+
+```
+class Animal {
+    name: string;
+}
+class Dog extends Animal {
+    breed: string;
+}
+
+// 错误：使用数值型的字符串索引，有时会得到完全不同的Animal!
+interface NotOkay {
+    [x: number]: Animal;
+    [x: string]: Dog;
+}
+```
+
+字符串索引声明了obj.property 和 obj\["property"\] 两种形式都可以。
+
+字符串索引签名能够很好的描述`dictionary`模式，并且它们也会确保所有属性与其返回值类型相匹配。
+
+```
+interface NumberDictionary {
+     [index: string]: number;
+     length: number;
+     name: string;   //error  name的类型与索引类型返回值的类型不匹配
+}
+```
+
+你还可以将索引签名设置为只读，这样就防止给索引赋值。
+
+```
+interface ReadonlyStringArray {
+    readonly [index: number]: string;
+}
+let myArray:ReadonlyStringArray = ["aaa", "bbb"];
+myArray[2] = "ccc";   //error
+```
+
+7、接口描述 -- 类类型
+
+TypeScript 也可以用接口来明确的强制一个类去符合某种契约。
+
+也可以在接口中描述一个方法，在类里面实现它。【 **implements 是类实现一个接口的关键字。】**
+
+```
+interface ClockInterface {
+    currentTime: Date;
+    setTime(d: Date);
+}
+
+class Clock implements ClockInterface {
+    currentTime: Date;
+    setTime(d: Date) {
+        this.currentTime = d;
+    }
+    constructor(h: number, m: number) { }
+}
 ```
 
 
