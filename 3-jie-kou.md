@@ -316,6 +316,8 @@ class Clock implements ClockInterface {
 
 因为当一个类实现一个接口的时候，只对实例部分进行类型检查。constructor存在于类的静态部分，不在检查范围内。
 
+因此，我们应该直接操作类的静态部分。如下：？？？
+
 ## 
 
 ## 8、接口继承
@@ -406,6 +408,8 @@ class TextBox exteneds Control {
     select() { }
 }
 
+//、、、、、、、、、、
+
 class Image implements SelectableControl {  //错误 ：Image；类型“state”属性
     select() { }
 }
@@ -414,27 +418,11 @@ class Location {
 }
 ```
 
-在Control类内部允许通过SelectableControl 的实力成员来访问私有成员state的。
+在Control类内部允许通过SelectableControl 的实例成员来访问私有成员state的。
 
 实际上SelectableControl就像control一样，并拥有一个select方法。
 
-Button
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Button和TextBox类 是SelectableControl的子类（因为它们都继承自control并有select方法）。
 
 
 
