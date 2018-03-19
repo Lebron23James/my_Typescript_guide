@@ -414,6 +414,22 @@ class Location {
 }
 ```
 
+在Control类内部允许通过SelectableControl 的实力成员来访问私有成员state的。
+
+实际上SelectableControl就像control一样，并拥有一个select方法。
+
+Button
+
+
+
+
+
+
+
+
+
+
+
 
 
 
