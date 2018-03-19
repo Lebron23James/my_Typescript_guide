@@ -232,7 +232,9 @@ let myStr: string = myArray[0];   //表示用number去索引具有stringArray接
 
 因为当使用number 来索引时，js会将它转变成string，然后再去索引对象。
 
-       也就是100去索引等同于“100”去索引，因此两者需保持一致。
+```
+   也就是100去索引等同于“100”去索引，因此两者需保持一致。
+```
 
 ```js
 class Animal {
@@ -257,7 +259,7 @@ interface NotOkay {
 interface NumberDictionary {
      [index: string]: number;
      length: number;
-     
+
      name: string;   //error  name的类型与索引类型返回值的类型不匹配
 }
 ```
@@ -276,7 +278,7 @@ myArray[2] = "ccc";   //error
 
 TypeScript 也可以用接口来明确的强制一个类去符合某种契约。
 
-也可以在接口中描述一个方法，在类里面实现它。【 **implements 是类实现一个接口的关键字。】**
+也可以在接口中描述一个方法，在类里面实现它\(如：setTime方法\)。【 **implements 是类实现一个接口的关键字。】**
 
 ```js
 interface ClockInterface {
@@ -296,6 +298,27 @@ class Clock implements ClockInterface {
 接口描述了类的公共部分，不是公共和私有两部分；它不会帮你检查类是否有某些私有成员。
 
 > #### 类的静态部分 与 实例部分的区别
+
+类是具有两个类型的： 静态部分的类型  和  实例的类型。
+
+当你定义一个接口，并试图定义一个类去实现 接口时会得到一个**错误**：
+
+```js
+interface ClockInterface {
+    new (hour: number, minute: number);
+}
+
+class Clock implements ClockInterface {
+    currentTime: Date;                            //实例部分
+    constructor(h: number, m: number) { }         //静态部分
+}
+```
+
+因为当一个类实现一个接口的时候，只对实例部分进行类型检查。constructor存在于类的静态部分，不在检查范围内。
+
+
+
+## 
 
 ## 8、接口继承
 
