@@ -8,7 +8,7 @@
 
 作用域规则：var声明可以在包含它的函数、模块、命名空间或全局作用域内部任何位置被访问。
 
-```
+```js
 function f(isTrue: boolean) {
    if(isTrue) {
       var x = 10;
@@ -22,7 +22,7 @@ f(false); // undefined
 
 变量捕获的怪异：
 
-```
+```js
 for (var i = 0; i < 10; i++) {
     setTimeout( function(){ console.log(i)}, 100*i );   //打印 10个 10
 }
@@ -32,7 +32,7 @@ for (var i = 0; i < 10; i++) {
 
 一个常用的解决方法，使用立即执行的函数表达式（IIFE）来捕获每次迭代时的i的值：
 
-```
+```js
 for (var i = 0; i < 10; i++) {
     (function(i){
         setTimeout( function(){ console.log(i)}, 100*i ); //打印 10个 10
@@ -46,7 +46,7 @@ for (var i = 0; i < 10; i++) {
 
 块作用域（词法作用域）：在包含它们的块 或 for循环之外是不能访问的。
 
-```
+```js
 for (var i = 0; i < 10; i++) {
     setTimeout( function(){ console.log(i)}, 100*i );   //打印 0/1/2/3/4/5/6/7/8/9
 }
@@ -54,14 +54,14 @@ for (var i = 0; i < 10; i++) {
 
 暂时性死区：变量不能在声明之前读 或 写。
 
-```
+```js
 a++;  //报错
 let a;
 ```
 
 不能在同一个作用域内多次声明同一个变量。
 
-```
+```js
 let s = 10;
 let s = 20; // 报错
 ```
