@@ -274,7 +274,7 @@ let myArray:ReadonlyStringArray = ["aaa", "bbb"];
 myArray[2] = "ccc";   //error
 ```
 
-## 7、接口描述 -- 类类型
+## 7、接口描述 -- 类类型   【？？？？】
 
 TypeScript 也可以用接口来明确的强制一个类去符合某种契约。
 
@@ -315,8 +315,6 @@ class Clock implements ClockInterface {
 ```
 
 因为当一个类实现一个接口的时候，只对实例部分进行类型检查。constructor存在于类的静态部分，不在检查范围内。
-
-
 
 ## 
 
@@ -363,7 +361,22 @@ square.sideLength = 5.0;
 以下是一个例子：一个对象可以同时作为函数和对象使用，并带有额外的属性。
 
 ```js
+interface Counter {
+    (start: number): string;
+    interval: number;
+    reset(): void;
+}
+function getCounter(): Counter {
+    let countner = <Counter>function (start:number) { };    //这是啥
+    counter.interval = 123;
+    counter.reset = function () { };
+    return counter;
+}
 
+let c = getCounter();
+c(10);                    // 作为函数
+c.reset();                // 作为对象
+c.interval = 5.0;         // 作为对象
 ```
 
 使用第三方库的时候，你可能需要像上面那样完整的定义类型。
@@ -371,4 +384,41 @@ square.sideLength = 5.0;
 ## 10、接口继承类
 
 当接口继承一个类类型时，他会继承类的成员，但是不包括其实现。
+
+即 接口声明了类中所有存在的成员，但是并没有提供具体实现。
+
+接口会继承类的private 和 protected 成员；但**这个接口类型只能被这个类或其子类所实现**\(implement\)。
+
+```js
+class Control {
+    private state: any;
+}
+
+interface SelectableControl extends Control {  //因为state是私有成员，所以只能是Control的子类才能够实现SelectableControl接口
+    select(): void;                            //因为只有Control的子类才能够拥有一个声明于control的私有state           
+}                                              //这对私有成员兼容性是必须的!        
+
+class Button extends Control implements SelectableControl {
+    select() { };
+}
+
+class TextBox exteneds Control {            
+    select() { }
+}
+
+class Image implements SelectableControl {  //错误 ：Image；类型“state”属性
+    select() { }
+}
+
+class Location {
+}
+```
+
+
+
+
+
+
+
+
 
