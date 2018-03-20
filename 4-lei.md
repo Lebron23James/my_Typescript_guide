@@ -29,7 +29,7 @@ let greeter = new Greeter("world");          //创建了Greeter类的一个实�
 
 new关键字调用之前定义的构造函数，并执行构造函数创建一个Greeter类型的新对象。
 
-
+    
 
 ## 2、类的继承
 
@@ -57,9 +57,9 @@ dog.move(10);
 
 Dog是一个派生类，派生自Animal基类，通过extends关键字； 派生类通常称为**子类**，基类通常称为**超类**。
 
+   
 
-
-以下例子创建了Animal的两个子类：
+以下例子创建了Animal的两个子类，描述了如何在子类中重写父类的方法：
 
 ```js
 class Animal {
@@ -93,5 +93,13 @@ sam.move();
 tom.move(34);
 ```
 
-派生类中包含一个构造函数，必须调用super\(\) 来执行基类的构造函数。 
+派生类中包含一个构造函数，必须调用super\(\) 来执行基类的构造函数。
+
+在构造函数里访问this的属性之前，一定要调用super\(\)；**这是TypeScript强制执行的一条重要规则。**
+
+Snake类 和 Horse类都创建了move方法，重写了从Animal继承来的move方法，使move方法根据不同的类有不同的功能。
+
+
+
+
 
