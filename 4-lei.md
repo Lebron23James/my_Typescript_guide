@@ -29,7 +29,7 @@ let greeter = new Greeter("world");          //创建了Greeter类的一个实�
 
 new关键字调用之前定义的构造函数，并执行构造函数创建一个Greeter类型的新对象。
 
-    
+
 
 ## 2、类的继承
 
@@ -55,9 +55,7 @@ dog.move(10);
 
 以上展示了最基本的类继承，类从基类中继承了属性和方法。
 
-Dog是一个派生类，派生自Animal基类，通过extends关键字； 派生类通常称为**子类**，基类通常称为**超类**。
-
-   
+> Dog是一个派生类，派生自Animal基类，通过extends关键字； 派生类通常称为**子类**，基类通常称为**超类**。
 
 以下例子创建了Animal的两个子类，描述了如何在子类中重写父类的方法：
 
@@ -86,11 +84,15 @@ class Horse extends Animal {
     }
 }
 
-let sam = new Snake("Sammy the Python");
-let tom: Animal = new Horse("Tommy the Palomino");
+let sam = new Snake("Sammy the Python"); 
+let tom: Animal = new Horse("Tommy the Palomino");  //即使tom声明为Animal类型，但是它从Horse实例化而来，会调用Horse里的方法
+ 
+sam.move();        // Slithering...
+                   // Sammy the Python moved 5m
 
-sam.move();
-tom.move(34);
+tom.move(34);      // Galloping...
+                   // Tommy the Palomino moved 34m.
+
 ```
 
 派生类中包含一个构造函数，必须调用super\(\) 来执行基类的构造函数。
@@ -101,5 +103,17 @@ Snake类 和 Horse类都创建了move方法，重写了从Animal继承来的move
 
 
 
+## 3、类的修饰符
 
+> #### （1）公共：public
+
+在TypeScript中，成员默认为public类型的。
+
+> #### （2）私有：private
+
+成员被标记为private时，就不能在声明它的类外部访问。
+
+> #### （3）受保护：protected
+
+protected修饰符与private修饰符类似，不同的一点：protected成员在派生类中仍然可以访问。
 
