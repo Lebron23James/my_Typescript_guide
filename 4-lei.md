@@ -129,7 +129,7 @@ class Animal {
 new Animal("cat").name;  //报错， name是私有的
 ```
 
- TypeScript 使用的是结构性的类型系统。
+TypeScript 使用的是结构性的类型系统。
 
 当我们比较两种不同的类型的时候，并不在乎它们从何处而来，如果所有的类型都是兼容的，我们就认为它们的类型是兼容的。
 
@@ -164,19 +164,117 @@ animal = employee; // 错误: Animal 与 Employee 不兼容.
 
 然而Employee 类里的那个私有成员name ，不是Animal 类里面的那一个，类型不兼容。
 
-
-
 > #### （3）受保护：protected
 
-protected修饰符与private修饰符类似，不同的一点：**protected成员在派生类中仍然可以访问。**
+1、protected修饰符与private修饰符类似，不同的一点：**protected成员在派生类中仍然可以访问。**
 
+```js
+class Person {
+    protected name: string;
+    constructor(name: string) { this.name = name; }
+}
 
+class Employee extends Person {
+    private department: string;
 
+    constructor(name: string, department: string) {
+        super(name)
+        this.department = department;
+    }
 
+    public getElevatorPitch() {   // 可以通过Employee 类的实例方法访问
+        return `Hello, my name is ${this.name} and I work in ${this.department}.`;
+    }
+}
 
+let howard = new Employee("Howard", "Sales");
+console.log(howard.getElevatorPitch());
+console.log(howard.name); // 错误 ---  但是不能在Person 类外使用name
+```
 
+因为Employee类由Person 类派生而来，所以我们可以通过Employee 类的实例方法访问。
 
+但是不能在Person 类外使用name。
 
+2、构造函数可以被标记为protected； 这个类可以被继承，但是不能在包含它的类外被实例化。
+
+```js
+class Person {
+    protected name: string;
+    protected constructor(theName: string) { this.name = theName; }
+}
+
+// Employee 能够继承 Person
+class Employee extends Person {
+    private department: string;
+
+    constructor(name: string, department: string) {
+        super(name);
+        this.department = department;
+    }
+
+    public getElevatorPitch() {
+        return `Hello, my name is ${this.name} and I work in ${this.department}.`;
+    }
+}
+
+let howard = new Employee("Howard", "Sales");
+let john = new Person("John"); // 错误: 'Person' 的构造函数是被保护的.
+```
+
+> #### （4）只读：readonly
+
+只读属性必须在声明时 或 构造函数实例化时 被初始化。
+
+```js
+class Octopus {
+    readonly name: string;
+    readonly numberOfLegs: number = 8;
+    constructor (theName: string) {
+        this.name = theName;
+    }
+}
+let dad = new Octopus("Man with the 8 strong legs");
+dad.name = "Man with the 3-piece suit"; // 错误! name 是只读的.
+```
+
+> #### 参数属性
+
+```js
+class Person {
+    protected name: string;
+    protected constructor(theName: string) { this.name = theName; }
+}
+```
+
+如上，我们不得不定义一个受保护的成员`name`和一个构造函数参数`theName`在`Person`类里，并且立刻给`name`和`theName`赋值。
+
+**参数属性 **可以方便地让我们在一个地方定义并初始化一个成员。 下面的例子是对之前`Animal`类的修改版，使用了参数属性：
+
+```js
+//原来版本
+class Animal {
+    name: string;
+    constructor(theName: string) { this.name = theName; }
+    move(distanceInMeters: number = 0) {
+        console.log(`${this.name} moved ${distanceInMeters}m.`);
+    }
+}
+```
+
+**参数属性 **通过给构造函数参数添加一个访问限定符 来声明。将声明和赋值合并到一处。
+
+* 使用private 限定一个参数属性会声明并初始化一个私有成员。
+
+```js
+//最新版本
+class Animal {
+    constructor(private name: string) { }  //此处 创建和初始化name成员
+    move(distanceInMeters: number) {
+        console.log(`${this.name} moved ${distanceInMeters}m.`);
+    }
+}
+```
 
 
 
