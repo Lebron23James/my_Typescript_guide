@@ -106,21 +106,79 @@ Snake类 和 Horse类都创建了move方法，重写了从Animal继承来的move
 
 也可以明确的将一个成员标记 public， 重写上面的Animal 类如下：
 
-    class Animal {
-        public name: string;
-        public constructor(theName: string) { this.name = theName; }
-        public move(distanceInMeters: number = 0) {
-            console.log(`${this.name} moved ${distanceInMeters}m.`);
-        }
+```js
+class Animal {
+    public name: string;
+    public constructor(theName: string) { this.name = theName; }
+    public move(distanceInMeters: number = 0) {
+        console.log(`${this.name} moved ${distanceInMeters}m.`);
     }
-
-
+}
+```
 
 > #### （2）私有：private
 
 成员被标记为private时，就不能在声明它的类外部访问。
 
+```js
+class Animal {
+    private name: string;
+    constructor(theName: string) { this.name = theName; }
+}
+
+new Animal("cat").name;  //报错， name是私有的
+```
+
+ TypeScript 使用的是结构性的类型系统。
+
+当我们比较两种不同的类型的时候，并不在乎它们从何处而来，如果所有的类型都是兼容的，我们就认为它们的类型是兼容的。
+
+**但是**，比较带有private 或 protected 类型的成员时，情况就是不同 了：
+
+> 如果其中一个类型包含private 或 protected 类型的成员，另外一个类型也存在这样一个private 或 protected 类型的成员，**并且它们都来自于同一处声明时**，我们才认为这两个类型是兼容的。
+
+```js
+class Animal {
+    private name: string;
+    constructor(theName: string) { this.name = theName; }
+}
+
+class Rhino extends Animal {
+    constructor() { super("Rhino"); }
+}
+
+class Employee {
+    private name: string;
+    constructor(theName: string) { this.name = theName; }
+}
+
+let animal = new Animal("Goat");
+let rhino = new Rhino();
+let employee = new Employee("Bob");
+
+animal = rhino;
+animal = employee; // 错误: Animal 与 Employee 不兼容.
+```
+
+因为Animal  和 Rhino 共享 来自Animal 的私有成员，因此它们是兼容的。
+
+然而Employee 类里的那个私有成员name ，不是Animal 类里面的那一个，类型不兼容。
+
+
+
 > #### （3）受保护：protected
 
-protected修饰符与private修饰符类似，不同的一点：protected成员在派生类中仍然可以访问。
+protected修饰符与private修饰符类似，不同的一点：**protected成员在派生类中仍然可以访问。**
+
+
+
+
+
+
+
+
+
+
+
+
 
