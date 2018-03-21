@@ -29,8 +29,6 @@ let greeter = new Greeter("world");          //创建了Greeter类的一个实�
 
 new关键字调用之前定义的构造函数，并执行构造函数创建一个Greeter类型的新对象。
 
-
-
 ## 2、类的继承
 
 基于类的程序设计中一种最基本的模式：允许使用继承扩展现有的类。
@@ -86,13 +84,12 @@ class Horse extends Animal {
 
 let sam = new Snake("Sammy the Python"); 
 let tom: Animal = new Horse("Tommy the Palomino");  //即使tom声明为Animal类型，但是它从Horse实例化而来，会调用Horse里的方法
- 
+
 sam.move();        // Slithering...
                    // Sammy the Python moved 5m
 
 tom.move(34);      // Galloping...
                    // Tommy the Palomino moved 34m.
-
 ```
 
 派生类中包含一个构造函数，必须调用super\(\) 来执行基类的构造函数。
@@ -101,13 +98,23 @@ tom.move(34);      // Galloping...
 
 Snake类 和 Horse类都创建了move方法，重写了从Animal继承来的move方法，使move方法根据不同的类有不同的功能。
 
-
-
 ## 3、类的修饰符
 
 > #### （1）公共：public
 
 在TypeScript中，成员默认为public类型的。
+
+也可以明确的将一个成员标记 public， 重写上面的Animal 类如下：
+
+    class Animal {
+        public name: string;
+        public constructor(theName: string) { this.name = theName; }
+        public move(distanceInMeters: number = 0) {
+            console.log(`${this.name} moved ${distanceInMeters}m.`);
+        }
+    }
+
+
 
 > #### （2）私有：private
 
