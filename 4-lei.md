@@ -276,6 +276,69 @@ class Animal {
 }
 ```
 
+## 4、存取器
+
+TypeScript支持通过 getters/setters 来截取对 对象成员的访问。 它能够帮助你有效控制对象成员的访问。
+
+没有存取器的例子，可以随意设置fullName，但是会带来麻烦。
+
+```js
+class Employee {
+    fullName: string;
+}
+
+let employee = new Employee();
+employee.fullName = "Bob Smith";
+if (employee.fullName) {
+    console.log(employee.fullName);
+}
+```
+
+将以上类设置为使用`get` 和 `set`方法，先检查用户密码是否正确，再修改员工信息。
+
+```js
+let passcode = "secret passcode";
+
+class Employee {
+    private _fullName: string;
+
+    get fullName(): string {
+        return this._fullName;
+    }
+
+    set fullName(newName: string) {
+        if (passcode && passcode == "secret passcode") {
+            this._fullName = newName;
+        }
+        else {
+            console.log("Error: Unauthorized update of employee!");
+        }
+    }
+}
+
+let employee = new Employee();
+employee.fullName = "Bob Smith";
+if (employee.fullName) {
+    alert(employee.fullName);
+}
+```
+
+我们可以修改一下密码，来验证一下存取器是否是工作的。当密码不对时，会提示我们没有权限去修改员工。
+
+
+
+对于存取器有以下几点需要注意：
+
+（1）存取器要求你将编译器设置为 ECMAScript5 或更高（不支持降级到ECMAScript）；
+
+（2）只带有get，不带有set 的存取器自动被推断为`readonly `；
+
+这在从代码生成`.d.ts`文件时是有帮助的，因为利用这个属性的用户会看到不允许够改变它的值。
+
+
+
+
+
 
 
 
