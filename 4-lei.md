@@ -333,15 +333,31 @@ if (employee.fullName) {
 
 这在从代码生成`.d.ts`文件时是有帮助的，因为利用这个属性的用户会看到不允许改变的值。
 
-
-
 ## 5、静态属性\(成员\)
 
 **类的实例属性**：那些仅当类被实例化的时候才会被初始化的属性。
 
-**类的静态属性**：存在于类本身上面而不是类的实例实例上。
+**类的静态属性**：存在于类本身上面而不是类的实例实例上。【static声明】
 
+```js
+class Grid {
+    static origin = {x: 0, y: 0};
+    calculateDistanceFromOrigin(point: {x: number; y: number;}) {
+        let xDist = (point.x - Grid.origin.x);
+        let yDist = (point.y - Grid.origin.y);
+        return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
+    }
+    constructor (public scale: number) { }
+}
 
+let grid1 = new Grid(1.0);  // 1x scale
+let grid2 = new Grid(5.0);  // 5x scale
 
+console.log(grid1.calculateDistanceFromOrigin({x: 10, y: 10}));
+console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
+```
 
+以上例子中，使用static 来定义`origin`—— 所有网格都会用到的属性。
+
+每个实例要想访问这个属性的时候，都要在 origin 前面加上类名（例如 Grid.），如同实例属性使用this前缀访问属性一样。
 
