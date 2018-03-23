@@ -367,7 +367,7 @@ console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
 
 不同于接口，抽象类可以包含成员的实现细节。
 
-`abstract `关键字是用于定义抽象类 和 在抽象类内部定义抽象方法。
+`abstract`关键字是用于定义抽象类 和 在抽象类内部定义抽象方法。
 
 ```js
 abstract class Animal {
@@ -378,5 +378,7 @@ abstract class Animal {
 }
 ```
 
-抽象类的抽象方法不包哈n
+抽象类的抽象方法不包含具体实现，并且必须在派生类中实现。
+
+抽象方法的语法 与 接口方法相似。两者都是定义方法签名但不包含方法体。 然而，抽象方法必须包含`abstract`关键字并且可以包含访问修饰符。
 
