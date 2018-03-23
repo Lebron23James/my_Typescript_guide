@@ -361,13 +361,22 @@ console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
 
 每个实例要想访问这个属性的时候，都要在 origin 前面加上类名（例如 Grid.），如同实例属性使用`this.`前缀访问属性一样。
 
-6、抽象类
+## 6、抽象类
 
+抽象类作为其他类的基类使用；他们一般不会直接被实例化。
 
+不同于接口，抽象类可以包含成员的实现细节。
 
+`abstract `关键字是用于定义抽象类 和 在抽象类内部定义抽象方法。
 
+```js
+abstract class Animal {
+    abstrsct makeSound(): void;
+    move(): void {
+        console.log('I am string');
+    }
+}
+```
 
-
-
-
+抽象类的抽象方法不包哈n
 
