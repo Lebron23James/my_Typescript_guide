@@ -418,7 +418,9 @@ department.printMeeting();
 department.generateReports();             // 错误: 方法在声明的抽象类中不存在
 ```
 
-7、高级技巧
+## 7、高级技巧
 
 （1）构造函数
+
+（2）把类当做接口使用
 
