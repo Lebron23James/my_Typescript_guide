@@ -5,4 +5,5 @@
 * [2 - 变量的声明](2-bian-liang-de-sheng-ming.md)
 * [3 - 接口](3-jie-kou.md)
 * [4 - 类](4-lei.md)
+* [5 - 函数](5-han-shu.md)
 
