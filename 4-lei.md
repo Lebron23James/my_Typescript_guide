@@ -422,5 +422,27 @@ department.generateReports();             // 错误: 方法在声明的抽象类
 
 （1）构造函数
 
+当在TypeScript 中声明一个类的时候，同时声明了很多的东西。
+
+> 1、声明了类的实例的类型。
+
+```js
+class Greeter {
+    greeting: string;
+    constructor(message: string) {
+        this.greeting = message;
+    }
+    greet() {
+        return "Hello, " + this.greeting;
+    }
+}
+
+let greeter: Greeter;            //Greeter类的实例的类型是Greeter
+greeter = new Greeter("world");
+console.log(greeter.greet());
+```
+
+2、创建了一个叫做构造函数丶值
+
 （2）把类当做接口使用
 
