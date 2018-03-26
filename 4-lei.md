@@ -453,7 +453,6 @@ let Greeter = (function () {         //其中let Greeter 被赋值为构造函�
     }
     Greeter.prototype.greet = function () {
         return "Hello, " + this.greeting;
-    };
     return Greeter;
 })();
 
@@ -490,7 +489,11 @@ let greeter2: Greeter = new greeterMaker();
 console.log(greeter2.greet());
 ```
 
+### （2）把类当做接口使用
+
+> 如上所示，类定义会创建两个东西：类的实例类型和一个构造函数。
+
+因为类可以创建出类型，所以你能够在允许使用接口的地方使用类。
 
 
-（2）把类当做接口使用
 
