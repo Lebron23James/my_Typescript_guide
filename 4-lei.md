@@ -420,7 +420,7 @@ department.generateReports();             // 错误: 方法在声明的抽象类
 
 ## 7、高级技巧
 
-（1）构造函数
+### （1）构造函数
 
 当在TypeScript 中声明一个类的时候，同时声明了很多的东西。
 
@@ -442,7 +442,55 @@ greeter = new Greeter("world");
 console.log(greeter.greet());
 ```
 
-2、创建了一个叫做构造函数丶值
+> 2、创建了一个叫做构造函数的值。这个函数会在使用new创建类实例的时候被调用。
+
+```js
+// ES5版本
+
+let Greeter = (function () {         //其中let Greeter 被赋值为构造函数，调用new并执行这个函数后，便会得到一个类的实例
+    function Greeter(message) {
+        this.greeting = message;
+    }
+    Greeter.prototype.greet = function () {
+        return "Hello, " + this.greeting;
+    };
+    return Greeter;
+})();
+
+let greeter;
+greeter = new Greeter("world");
+console.log(greeter.greet());
+```
+
+类具有 **实例部分 **与 **静态部分 **这两个部分。
+
+```js
+class Greeter {
+    static standardGreeting = "Hello, there";      // 静态属性
+    greeting: string;
+    greet() {
+        if (this.greeting) {
+            return "Hello, " + this.greeting;
+        }
+        else {
+            return Greeter.standardGreeting;
+        }
+    }
+}
+
+let greeter1: Greeter;
+greeter1 = new Greeter();                          //实例化
+console.log(greeter1.greet());
+
+
+let greeterMaker: typeof Greeter = Greeter;        // typeof Greeter，意思是取Greeter类的类型，而不是实例的类型。 
+greeterMaker.standardGreeting = "Hey there!";
+
+let greeter2: Greeter = new greeterMaker();
+console.log(greeter2.greet());
+```
+
+
 
 （2）把类当做接口使用
 
