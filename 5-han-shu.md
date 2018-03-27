@@ -24,7 +24,7 @@ let z = 100;        // 函数可以 捕获 函数体外部的变量。
 
 ## 2、函数类型
 
-（1）为函数定义类型；
+#### （1）为函数定义类型；
 
 我们可以给每个函数参数添加类型，也可以为函数本身添加返回值类型。
 
@@ -38,7 +38,7 @@ function add(x: number, y: number): number {
 let myAdd = function(x: number, y: number): number { return x + y; };
 ```
 
-（2）书写完整函数类型；
+#### （2）书写完整函数类型；
 
 函数类型包含两部分：**参数类型** 和 **返回值类型**。    完整函数类型 这两部分是必须的。
 
@@ -60,5 +60,20 @@ let myAdd: (baseValue: number, increment: number) => number =
 >
 > 返回值类型是函数类型的必要部分，没有任何返回值必须指定返回值类型为 `void` 而不能留空。
 
-（3）推断类型；
+#### （3）推断类型；
+
+如果你在赋值语句一边指定了类型，另一边没有的话； TypeScript编译器就会自动识别出类型。
+
+这叫“按上下文归类”，是类型推论的一种。
+
+```js
+// myAdd has the full function type
+let myAdd = function(x: number, y: number): number { return x + y; };
+
+// The parameters `x` and `y` have the type number
+let myAdd: (baseValue: number, increment: number) => number =
+    function(x, y) { return x + y; };
+```
+
+
 
