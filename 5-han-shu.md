@@ -22,11 +22,21 @@ let myAdd = function(x, y) { return x + y + z; };
 let z = 100;        // 函数可以 捕获 函数体外部的变量。
 ```
 
-
-
 ## 2、函数类型
 
 （1）为函数定义类型；
+
+我们可以给每个函数参数添加类型，也可以为函数本身添加返回值类型。
+
+> TypeScript 能够根据返回语句 自动推断出返回值类型，因此我们通常省略函数返回值类型。
+
+```js
+function add(x: number, y: number): number {
+    return x + y;
+}
+
+let myAdd = function(x: number, y: number): number { return x + y; };
+```
 
 （2）书写完整函数类型；
 
