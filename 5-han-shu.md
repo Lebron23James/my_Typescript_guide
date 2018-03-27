@@ -40,5 +40,25 @@ let myAdd = function(x: number, y: number): number { return x + y; };
 
 （2）书写完整函数类型；
 
+函数类型包含两部分：**参数类型** 和 **返回值类型**。    完整函数类型 这两部分是必须的。
+
+```js
+let myAdd: (x: number, y: number) => number =
+    function(x: number, y: number): number { return x + y; };
+```
+
+> 以参数列表的形式写出**参数类型**，为每个参数指定一个名字和类型。
+>
+> 只要参数类型是匹配的，就认为它是有效的函数类型，不在乎参数名是否正确。
+
+```js
+let myAdd: (baseValue: number, increment: number) => number =
+    function(x: number, y: number): number { return x + y; };
+```
+
+> 对于**返回值类型**：我们在函数 和 返回值类型之前使用\(`=>`\)符号。
+>
+> 返回值类型是函数类型的必要部分，没有任何返回值必须指定返回值类型为 `void` 而不能留空。
+
 （3）推断类型；
 
