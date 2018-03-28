@@ -6,4 +6,5 @@
 * [3 - 接口](3-jie-kou.md)
 * [4 - 类](4-lei.md)
 * [5 - 函数](5-han-shu.md)
+* [6 - 泛型](6-fan-xing.md)
 

@@ -259,7 +259,7 @@ let pickedCard = cardPicker();
 alert("card: " + pickedCard.card + " of " + pickedCard.suit);
 ```
 
-this参数在回调函数里？？
+**this参数在回调函数里？？**
 
 ## 6、重载
 
@@ -325,5 +325,5 @@ alert("card: " + pickedCard2.card + " of " + pickedCard2.suit);
 
 为了让编译器能够选择正确的检查类型，它查找重载列表，尝试使用第一个重载定义。如果匹配的话就使用这个。
 
- 因此，在定义重载的时候，一定要把最精确的定义放在最前面。
+因此，在定义重载的时候，一定要把最精确的定义放在最前面。
 
