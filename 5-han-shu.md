@@ -110,8 +110,6 @@ let result3 = buildName("Bob", "Adams");  // ah, just right
 
 **注意**：可选参数必须跟在必须参数后面。
 
-
-
 #### （2）默认参数
 
 在TypeScript 中，我们可以给参数指定一个默认值--- 当用户没有传递这个参数 或 传递的值时undefined 的时候生效。
@@ -164,12 +162,42 @@ let employeeName = buildName("Joseph", "Samuel", "Lucas", "MacKinzie");
 
 > （...）也可以在带有剩余参数的函数类型定义上使用
 
-```
+```js
 function buildName(firstName: string, ...restOfName: string[]) {
   return firstName + " " + restOfName.join(" ");
 }
 
 let buildNameFun: (fname: string, ...rest: string[]) => string = buildName;
+```
+
+## 5、this 与 箭头函数
+
+JavaScript中，this的值在函数被调用的时候才会指定。
+
+以下例子的中，`createCardPicker` 是一个函数，返回了另外一个函数。
+
+运行程序的时候就会报错 ———因为调用`cardPicker()`的时候，this指向的是**`window`**。【严格模式下this为undefined】
+
+
+
+```js
+let deck = {
+    suits: ["hearts", "spades", "clubs", "diamonds"],
+    cards: Array(52),
+    createCardPicker: function() {
+        return function() {
+            let pickedCard = Math.floor(Math.random() * 52);
+            let pickedSuit = Math.floor(pickedCard / 13);
+
+            return {suit: this.suits[pickedSuit], card: pickedCard % 13};
+        }
+    }
+}
+
+let cardPicker = deck.createCardPicker();
+let pickedCard = cardPicker();
+
+alert("card: " + pickedCard.card + " of " + pickedCard.suit);
 ```
 
 
