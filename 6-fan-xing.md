@@ -4,5 +4,15 @@
 
 ---
 
-1、泛型 -- hello world
+## 1、泛型 -- hello world
+
+使用`any` 类型来定义函数可以接受任何类型的`arg`参数。但是这样会丢失一些信息：传入的类型与返回的类型应该是相同的。
+
+```
+function identity(arg: any): any {
+    return arg;
+}
+```
+
+
 
