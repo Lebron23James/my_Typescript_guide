@@ -44,3 +44,7 @@ let output = identity("myString");  // type of output will be 'string'
 
 如果编译器不能够自动地推断出类型的话，只能像上面（1）那样明确的传入T的类型
 
+## 2、使用泛型变量
+
+使用泛型创建像`identity`这样的泛型函数时，编译器要求你在函数体必须正确的使用这个通用的类型。
+
