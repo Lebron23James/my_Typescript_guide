@@ -24,5 +24,23 @@ function identity<T>(arg: T): T {
 }
 ```
 
+我们给 identity 函数添加了类型变量T。T帮助我们捕获传入的类型，之后再使用T作为返回值的时候，我们就知道了返回值的类型。
 
+允许我们跟踪函数里面使用的类型的信息。我们将这个版本的`identity`函数叫做**泛型**。
+
+泛型函数的使用方法有两种：
+
+##### （1）传入所有的参数，包括类型参数：
+
+```js
+let output = identity<string>("myString");  // type of output will be 'string
+```
+
+##### （2）使用类型推论 ---  编译器会根据我们传入的参数自动的帮我们确定T的类型。【更普遍】
+
+```
+let output = identity("myString");  // type of output will be 'string'
+```
+
+如果编译器不能够自动地推断出类型的话，只能像上面（1）那样明确的传入T的类型
 
