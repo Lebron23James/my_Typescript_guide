@@ -29,6 +29,8 @@ let greeter = new Greeter("world");          //创建了Greeter类的一个实�
 
 new关键字调用之前定义的构造函数，并执行构造函数创建一个Greeter类型的新对象。
 
+---
+
 ## 2、类的继承
 
 基于类的程序设计中一种最基本的模式：允许使用继承扩展现有的类。
@@ -97,6 +99,8 @@ tom.move(34);      // Galloping...
 在构造函数里访问this的属性之前，一定要调用super\(\)；**这是TypeScript强制执行的一条重要规则。**
 
 Snake类 和 Horse类都创建了move方法，重写了从Animal继承来的move方法，使move方法根据不同的类有不同的功能。
+
+---
 
 ## 3、类的修饰符
 
@@ -276,6 +280,8 @@ class Animal {
 }
 ```
 
+---
+
 ## 4、存取器
 
 TypeScript支持通过 getters/setters 来截取对 对象成员的访问。 它能够帮助你有效控制对象成员的访问。
@@ -333,6 +339,8 @@ if (employee.fullName) {
 
 这在从代码生成`.d.ts`文件时是有帮助的，因为利用这个属性的用户会看到不允许改变的值。
 
+---
+
 ## 5、静态属性\(成员\)
 
 **类的实例属性**：那些仅当类被实例化的时候才会被初始化的属性。———— 用`this.`来访问
@@ -360,6 +368,8 @@ console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
 以上例子中，使用static 来定义`origin`—— 所有网格都会用到的属性。
 
 每个实例要想访问这个属性的时候，都要在 origin 前面加上类名（例如 Grid.），如同实例属性使用`this.`前缀访问属性一样。
+
+---
 
 ## 6、抽象类
 
@@ -417,6 +427,8 @@ department.printName();
 department.printMeeting();
 department.generateReports();             // 错误: 方法在声明的抽象类中不存在
 ```
+
+---
 
 ## 7、高级技巧
 

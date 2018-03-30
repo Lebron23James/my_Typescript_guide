@@ -22,6 +22,8 @@ let myAdd = function(x, y) { return x + y + z; };
 let z = 100;        // 函数可以 捕获 函数体外部的变量。
 ```
 
+---
+
 ## 2、函数类型
 
 #### （1）为函数定义类型；
@@ -74,6 +76,8 @@ let myAdd = function(x: number, y: number): number { return x + y; };
 let myAdd: (baseValue: number, increment: number) => number =
     function(x, y) { return x + y; };
 ```
+
+---
 
 ## 3、可选参数 和 默认参数
 
@@ -140,6 +144,8 @@ let result3 = buildName("Bob", "Adams");         // okay and returns "Bob Adams"
 let result4 = buildName(undefined, "Adams");     // okay and returns "Will Adams"
 ```
 
+---
+
 ## 4、剩余参数
 
 必要参数、默认参数、可选参数的共同点：他们表示某一个参数。
@@ -169,6 +175,8 @@ function buildName(firstName: string, ...restOfName: string[]) {
 
 let buildNameFun: (fname: string, ...rest: string[]) => string = buildName;
 ```
+
+---
 
 ## 5、this 与 箭头函数
 
@@ -260,6 +268,8 @@ alert("card: " + pickedCard.card + " of " + pickedCard.suit);
 ```
 
 **this参数在回调函数里？？**
+
+---
 
 ## 6、重载
 
