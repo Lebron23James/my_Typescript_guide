@@ -7,4 +7,5 @@
 * [4 - 类](4-lei.md)
 * [5 - 函数](5-han-shu.md)
 * [6 - 泛型](6-fan-xing.md)
+* [7 - 枚举](7-mei-ju.md)
 
