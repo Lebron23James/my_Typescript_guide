@@ -1,6 +1,8 @@
 > ## 简介
 
-**泛型** 可以用来创建可重用的组件，一个组件可以支持多种类型的数据。这样用户就可以以自己的数据类型来使用组件。、
+**泛型** 可以用来创建可重用的组件，一个组件可以支持多种类型的数据。这样用户就可以以自己的数据类型来使用组件。
+
+可以创建 泛型接口 和 泛型类；但是无法创建 泛型枚举 和 泛型命名空间。
 
 ---
 
@@ -46,7 +48,7 @@ let output = identity("myString");  // type of output will be 'string'
 
 如果编译器不能够自动地推断出类型的话，只能像上面（1）那样明确的传入T的类型
 
---
+---
 
 ## 2、泛型变量
 
@@ -87,11 +89,11 @@ function loggingIdentity<T>(arg: Array<T>): Array<T> {
 }
 ```
 
- ---
+---
 
 ## 3、泛型接口
 
-泛型函数与非泛型函数没什么不同，只是有一个类型参数在最前面，像函数声明一样。
+泛型函数与非泛型函数没什么不同，只是有一个**类型参数**在最前面，像函数声明一样。
 
 ```js
 function identity<T>(arg: T): T {
@@ -101,7 +103,7 @@ function identity<T>(arg: T): T {
 let myIdentity: <U>(arg: U) => U = identity;  // 可以使用不同的泛型参数名（对应即可）
 ```
 
- 还可以使用带有调用签名的队形字面量来定义泛型函数。
+还可以使用带有调用签名的对象字面量来定义泛型函数。
 
 ```js
 function identity<T>(arg: T): T {
@@ -110,6 +112,107 @@ function identity<T>(arg: T): T {
 
 let myIdentity: {<T>(arg: T): T} = identity;
 ```
+
+接下来将上面的对象字面量为一个接口，来定义泛型接口。
+
+```js
+interface GenericIdentityFn {
+    <T>(arg: T): T;
+}
+
+function identity<T>(arg: T): T {
+    return arg;
+}
+
+let myIdentity: GenericIdentityFn = identity;
+```
+
+我们可以把泛型参数当做整个接口的一个参数，这样就能清楚的知道使用的是哪个泛型类型了 。
+
+```js
+interface GenericIdentityFn<T> {
+    (arg: T): T;
+}
+
+function identity<T>(arg: T): T {
+    return arg;
+}
+
+let myIdentity: GenericIdentityFn<number> = identity;
+```
+
+```markdown
+以上不再描述泛型函数，而是把非泛型函数签名作为泛型类型一部分。 
+当我们使用 GenericIdentityFn的时候，还得传入一个类型参数来指定泛型类型（这里是：number），锁定了之后代码里使用的类型。 
+对于描述哪部分类型属于泛型部分来说，理解何时把参数放在调用签名里和何时放在接口上是很有帮助的。
+```
+
+---
+
+## 4、泛型类
+
+泛型类将泛型类型放在（&lt;&gt;）中，跟在类名后面。
+
+```js
+class GenericNumber<T> {
+    zeroValue: T;
+    add: (x: T, y: T) => T;
+}
+
+let myGenericNumber = new GenericNumber<number>();
+myGenericNumber.zeroValue = 0;
+myGenericNumber.add = function(x, y) { return x + y; };
+
+let stringNumeric = new GenericNumber<string>();
+stringNumeric.zeroValue = "";
+stringNumeric.add = function(x, y) { return x + y; };
+
+alert(stringNumeric.add(stringNumeric.zeroValue, "test"));
+```
+
+与接口一样，直接把泛型类型写在类的后面，可以确认类的所有属性都在使用相同的类型。
+
+**注意**：泛型类指的是实例部分的类型，所以类的静态属性不能使用这个泛型类型。
+
+---
+
+## 5、泛型约束
+
+情形：有时我们想要操作某类型的一组值，并且我们知道这组值具有什么样的属性。如下：
+
+```js
+function loggingIdentity<T>(arg: T): T {
+    console.log(arg.length);  // Error: 这里编译器不能证明每种类型都有length属性
+    return arg;
+}
+```
+
+为此我们定义一个接口来描述约束条件： 创建一个包含 .length 属性的接口，使用这个**接口和extends关键字**来实现约束。
+
+```js
+interface Lengthwise {
+    length: number;
+}
+
+function loggingIdentity<T extends Lengthwise>(arg: T): T {
+    console.log(arg.length);  // Now we know it has a .length property, so no more error
+    return arg;
+}
+```
+
+以上的泛型函数定义了约束，因此它不在适用于任何类型：
+
+```
+loggingIdentity(3);        //报错， number没有length属性
+```
+
+我们需要传入符合约束类型的值，必须包含必须的属性：
+
+```
+loggingIdentity({length: 10, value: 3});
+```
+
+（1）在泛型约束中使用类型参数
 
 
 
