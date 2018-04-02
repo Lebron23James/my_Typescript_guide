@@ -37,8 +37,6 @@ labelLedValue接口好比是一个名字，用来描述上面例子里的要求�
 
 > **注意**：类型检查器不会检查属性的顺序，只要相应的属性存在并且类型正确就可以。
 
----
-
 ## 2、可选属性
 
 接口里的属性不全都是必须的。可选属性的定义只是在属性名字后面加一个 “？”符号。
@@ -90,8 +88,6 @@ function createSquare (config: SquareConfig): {color: string; area:number} {
 let mySquare = createSquare({color: "black"});
 ```
 
----
-
 ## 3、只读属性
 
 一些对象属性只能在对象刚刚创建时能够修改其值；可以在属性名之前加readonly类指定为只读属性。
@@ -125,8 +121,6 @@ a = ro as number[];
 > #### readonly VS const
 
 作为变量使用的话用 const， 作为属性使用的话用 readonly。
-
----
 
 ## 4、额外的属性检查
 
@@ -174,8 +168,6 @@ let squaerOptions = { width:100, height:50 };
 let mySquare = createSquare(squaerOptions);
 ```
 
----
-
 ## 5、接口描述 -- 函数类型
 
 为了使用接口表示函数类型，我们需要给接口定义一个**调用签名**。
@@ -219,8 +211,6 @@ mySearch = function(src, sub) {
     return result > -1;
 }
 ```
-
----
 
 ## 6、接口描述 -- 可索引类型
 
@@ -284,8 +274,6 @@ let myArray:ReadonlyStringArray = ["aaa", "bbb"];
 myArray[2] = "ccc";   //error
 ```
 
----
-
 ## 7、接口描述 -- 类类型   【？？？？】
 
 TypeScript 也可以用接口来明确的强制一个类去符合某种契约。
@@ -330,10 +318,6 @@ class Clock implements ClockInterface {
 
 因此，我们应该直接操作类的静态部分。如下：？？？
 
-
-
----
-
 ## 8、接口继承
 
 接口和类一样也可以实现相互继承。这让我们能从一个成员里复制成员到另一个接口，可以更灵活的将接口分割到可重用的模快里。
@@ -370,8 +354,6 @@ square.penWidth = 10;
 square.sideLength = 5.0;
 ```
 
----
-
 ## 9、混合类型
 
 接口能够描述JavaScript里丰富的类型。有时你希望一个对象能够具有上面提到的多种类型。
@@ -398,8 +380,6 @@ c.interval = 5.0;         // 作为对象
 ```
 
 使用第三方库的时候，你可能需要像上面那样完整的定义类型。
-
----
 
 ## 10、接口继承类
 

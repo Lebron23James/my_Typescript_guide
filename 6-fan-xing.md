@@ -48,8 +48,6 @@ let output = identity("myString");  // type of output will be 'string'
 
 如果编译器不能够自动地推断出类型的话，只能像上面（1）那样明确的传入T的类型
 
----
-
 ## 2、泛型变量
 
 使用泛型创建像`identity`这样的泛型函数时，编译器要求你在函数体必须**正确的使用**这个通用的类型。
@@ -88,8 +86,6 @@ function loggingIdentity<T>(arg: Array<T>): Array<T> {
     return arg;
 }
 ```
-
----
 
 ## 3、泛型接口
 
@@ -147,8 +143,6 @@ let myIdentity: GenericIdentityFn<number> = identity;
 对于描述哪部分类型属于泛型部分来说，理解何时把参数放在调用签名里和何时放在接口上是很有帮助的。
 ```
 
----
-
 ## 4、泛型类
 
 泛型类将泛型类型放在（&lt;&gt;）中，跟在类名后面。
@@ -173,8 +167,6 @@ alert(stringNumeric.add(stringNumeric.zeroValue, "test"));
 与接口一样，直接把泛型类型写在类的后面，可以确认类的所有属性都在使用相同的类型。
 
 **注意**：泛型类指的是实例部分的类型，所以类的静态属性不能使用这个泛型类型。
-
----
 
 ## 5、泛型约束
 
