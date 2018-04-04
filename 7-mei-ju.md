@@ -222,8 +222,7 @@ enum Enum {
     A
 }
 let a = Enum.A;
-let nameOfA = Enum[A];  // a
-
+let nameOfA = Enum[a];  //A
 ```
 
 
