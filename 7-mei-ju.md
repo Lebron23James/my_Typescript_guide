@@ -149,7 +149,46 @@ enum FileAccess {
 
 当所有的枚举成员都拥有了字面量枚举时，它就带有了一种特殊的语义。
 
-（1）首先枚举成员成为了类型。
+（1）首先枚举成员成为了类型。（例如：我们可以说某些成员只能是枚举成员的值）
+
+```js
+enum ShapeKind {
+    Circle,
+    Square,
+}
+
+interface Circle {
+    kind: ShapeKind.Circle;
+    radius: number;
+}
+
+interface Square {
+    kind: ShapeKind.Square;
+    sideLength: number;
+}
+
+let c: Circle = {
+    kind: ShapeKind.Square,
+    //    ~~~~~~~~~~~~~~~~ Error!
+    radius: 100,
+}    
+```
 
 （2）枚举类型本身变成了每个枚举成员的 **联合**。
+
+```js
+enum E {
+    Foo,
+    Bar,
+}
+
+function f(x: E) {
+    if (x !== E.Foo || x !== E.Bar) {
+        //             ~~~~~~~~~~~
+        // Error! Operator '!==' cannot be applied to types 'E.Foo' and 'E.Bar'.
+    }
+}
+```
+
+
 
