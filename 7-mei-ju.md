@@ -215,15 +215,30 @@ f(E);
 
 ## 7、反向映射
 
-数字枚举成员还具有反向映射： 从枚举值到枚举名字！！
+**数字枚举成员**还具有反向映射： 从枚举值到枚举名字！！     【不会为字符串枚举成员生成反向映射】
 
 ```js
 enum Enum {
     A
 }
 let a = Enum.A;
-let nameOfA = Enum[a];  //A
+let nameOfA = Enum[a];  // "A"
 ```
 
+编译为JavaScript 代码如下：
 
+```js
+var Enum;
+(function (Enum) {
+    Enum[Enum["A"] = 0] = "A";
+})(Enum || (Enum = {}));
+var a = Enum.A;
+var nameOfA = Enum[a]; // "A"
+```
+
+以上代码中，枚举类型被编译成一个对象；它包含正向映射（key--&gt;value）和反向映射（value--&gt;key）
+
+引用枚举成员总会生成-- 对属性的访问，并且永远也不会内联代码。
+
+8、const 枚举
 
