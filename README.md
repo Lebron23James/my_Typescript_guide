@@ -1,4 +1,4 @@
-> ## 简介
+> ## d简介dd
 
 * Typescript 是一种由微软开发的自由和开源的编程语言。
 
@@ -10,7 +10,7 @@
 
 > # 目录
 
-[Introduction](README.md) 
+[Introduction](README.md)
 
 * [1- 基本数据类型](1-ji-ben-shu-ju-lei-xing.md) 
 * [2 - 变量的声明](2-bian-liang-de-sheng-ming.md) 
