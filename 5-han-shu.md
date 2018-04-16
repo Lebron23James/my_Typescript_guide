@@ -4,7 +4,7 @@
 
 TypeScript 虽然已经支持类、命名空间 和 模块； 但是函数仍是主要定义** 行为** 的地方。
 
-TypeScript 为 JavaScript 函数添加了额外的功能，让我们更容易的使用。
+TypeScript 为 JavaScript 函数添加了额外的功能，让我们更容易的使用。 
 
 ---
 
