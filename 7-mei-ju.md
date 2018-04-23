@@ -251,5 +251,22 @@ const enum Enum {
 }
 ```
 
+常量枚举只能使用常量枚举表达式，并且不同于常规枚举的是：他们在编译阶段会被删除。
+
+常量枚举成员在使用的地方会被内联进来； 因为常量枚举不允许包含计算成员。
+
+```js
+const enum Directions {
+    up,
+    down,
+    left,
+    right
+}
+let directions = [Directions.up, Directions.dowm, Directions.left, Directions.right]
+
+//生成后的代码
+var directions = [0 /* Up */, 1 /* Down */, 2 /* Left */, 3 /* Right */];
+```
+
 
 
