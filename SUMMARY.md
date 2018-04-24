@@ -9,4 +9,5 @@
 * [6 - 泛型](6-fan-xing.md)
 * [7 - 枚举](7-mei-ju.md)
 * [8 - 类型推论](8-lei-xing-tui-lun.md)
+* [9 - 类型兼容性](9-lei-xing-jian-rong-xing.md)
 
