@@ -36,3 +36,46 @@ TypeScript的类型系统允许某些在编译阶段无法确认其安全性的�
 
 TypeScript结构化类型系统的基本规则：如果x要兼容y，那么y至少具有与x相同的属性。
 
+```js
+interface Named {
+    name: string;
+}
+
+let x: Named;
+
+let y = { name: 'Alice', location: 'Seattle' }; // y's inferred type is { name: string; location: string; }
+
+x = y;
+```
+
+编译器会检查x中的每个属性，看能否在y 中找到对应的属性。
+
+以上y是否能赋值给x；检查y必须要包含名字是name 的string 类型成员---- 满足条件，所以赋值正确。
+
+--- 
+
+检查函数参数时，使用相同的规则：
+
+```js
+function greet(n: Named) {
+    alert('Hello, ' + n.name);
+}
+greet(y); // OK
+```
+
+`y`有个额外的`location`属性，但这不会引发错误。 只有目标类型（这里是`Named`）的成员会被一一检查是否兼容。
+
+这个比较过程是递归进行的，检查每个成员及子成员！！！
+
+## 3、比较两个函数
+
+```js
+let x = (a: number) => 0;
+let y = (b: number, s: string) => 0;
+
+y = x; // OK
+x = y; // Error
+```
+
+（1）先检查x是否能赋值给y：
+
