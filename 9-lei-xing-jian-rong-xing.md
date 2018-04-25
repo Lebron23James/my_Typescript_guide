@@ -52,7 +52,7 @@ x = y;
 
 以上y是否能赋值给x；检查y必须要包含名字是name 的string 类型成员---- 满足条件，所以赋值正确。
 
---- 
+---
 
 检查函数参数时，使用相同的规则：
 
@@ -77,5 +77,35 @@ y = x; // OK
 x = y; // Error
 ```
 
-（1）先检查x是否能赋值给y：
+（1）检查x 是否能赋值给y：x的每个参数必须能在y 里找到对应类型的参数。【参数名称相同与否无所谓，只看参数类型】
+
+（2）检查y 是否能赋值给x：y有必须的第二个参数，x没有，所以不允许赋值。
+
+----- 
+
+如上例子（1）中 y = x ，允许忽略参数， 因为额外的参数在JavaScript中是很常见的。
+
+```js
+let items = [1, 2, 3];
+
+// Don't force these extra arguments
+items.forEach((item, index, array) => console.log(item));
+
+// Should be OK!
+items.forEach((item) => console.log(item));
+```
+
+----- 
+
+对于函数返回值类型的处理：
+
+```js
+let x = () => ({name: 'Alice'});
+let y = () => ({name: 'Alice', location: 'Seattle'});
+
+x = y; // OK
+y = x; // Error because x() lacks a location property
+```
+
+类型系统强制要求：** 源函数的返回值类型必须是目标函数返回值类型的子类型。**
 
