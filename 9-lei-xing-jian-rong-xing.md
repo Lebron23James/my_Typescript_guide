@@ -8,5 +8,29 @@ TypeScript 里的类型兼容性是基于结构子类型的。
 
 ---
 
+1、基础
 
+```js
+interface Named {
+    name: string;
+}
+
+class Person {
+    name: string;
+}
+
+let p: Named;
+// OK, because of structural typing
+p = new Person();
+```
+
+使用基于名义类型的语言，以上代码就回报错， 因为Person类没有明确说明其实现了Named 接口。
+
+因为js里广泛地使用匿名对象，如函数表达式和对象字面量；TypeScript的结构性子类型是根据JavaScript代码的典型写法来设计的。
+
+--- 关于可靠性---
+
+TypeScript的类型系统允许某些在编译阶段无法确认其安全性的操作。当一个类型系统具此属性时，被当做是“不可靠”的。
+
+2、
 
