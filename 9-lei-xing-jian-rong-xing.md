@@ -183,5 +183,54 @@ s = a;  //OK
 
 因为TypeScript是结构性的类型系统，类型参数只影响-- 使用其作为类型一部分的结果类型。
 
+```js
+interface Empty<T> {
+}
+let x: Empty<number>;
+let y: Empty<string>;
 
+x = y;  // okay, y matches structure of x
+```
+
+以上代码的x 和 y  是兼容的，因为它们的结构使用类型参数时并没有什么不同。
+
+----
+
+```js
+interface NotEmpty<T> {
+    data: T;
+}
+let x: NotEmpty<number>;
+let y: NotEmpty<string>;
+
+x = y;  // error, x and y are not compatible
+```
+
+以上代码，泛型类型在使用时就好比不是一个泛型类型
+
+--- 
+
+对于没有指定泛型类型的泛型参数时，会把所有泛型参数当做  any 比较。 然后用结果类型进行比较。
+
+```js
+let identity = function<T>(x: T): T {
+    // ...
+}
+
+let reverse = function<U>(y: U): U {
+    // ...
+}
+
+identity = reverse;  // Okay because (x: any)=>any matches (y: any)=>any
+```
+
+## 7、高级主题
+
+在TypeScript 中，有两种类型的兼容性： **子类型** 与** 赋值**。
+
+他们的不同点在于： 赋值扩展了子类型的兼容，允许给any 赋值或从any 取值；允许数字赋值给枚举类型或枚举类型赋值给数字。
+
+--- 
+
+实际上，类型兼容性是由赋值兼容性来控制的，即使在implements 和 extends 语句中不例外。
 
