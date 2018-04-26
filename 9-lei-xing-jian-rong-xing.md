@@ -117,9 +117,63 @@ y = x; // Error because x() lacks a location property
 
 比较函数兼容性的时候，可选参数与必须参数是可互换的。
 
-
-
 源类型上有额外的可选参数不是错误，目标类型的可选参数在源类型里没有对应的参数也不是错误。
 
 当一个函数有剩余参数的 时候，它被当做无限个可选参数。
+
+如下例子，常见函数接受一个回调函数，并用参数（对程序员来说可预知，对类型系统来说不确定）来调用：
+
+```js
+function invokeLater(args: any[], callback: (...args: any[]) => void) {
+    /* ... Invoke callback with 'args' ... */
+}
+
+// Unsound - invokeLater "might" provide any number of arguments
+invokeLater([1, 2], (x, y) => console.log(x + ', ' + y));
+
+// Confusing (x and y are actually required) and undiscoverable
+invokeLater([1, 2], (x?, y?) => console.log(x + ', ' + y));
+```
+
+## 4、枚举
+
+枚举类型与数字类型兼容，且数字类型与枚举类型兼容； 但是不同枚举类型之间是不兼容的。
+
+```js
+enum Status { Ready, Waiting };
+enum Color { Red, Blue, Green };
+
+let status = Status.Ready;
+status = Color.Green;  //error
+```
+
+## 5、类
+
+类有静态部分 和 实例部分的类型。比较两个类 类型的对象时，只有**实例的成员**会被比较，静态成员和构造函数不在比较的范围内。
+
+```js
+class Animal {
+    feet: number;
+    constructor(name: string, numFeet: number) { }
+}
+
+class Size {
+    feet: number;
+    constructor(numFeet: number) { }
+}
+
+let a: Animal;
+let s: Size;
+
+a = s;  //OK
+s = a;  //OK     
+```
+
+#### 类的私有成员
+
+类的私有成员会影响兼容性的判断：
+
+          当类的实例用来检查兼容时，如果目标类型包含一个私有成员，那么源类型必须包含来自同一个类的这个私有成员。
+
+          这样允许子类赋值给父类，但是不能赋值给其他的类（即使这个类有相同的类型）。
 
