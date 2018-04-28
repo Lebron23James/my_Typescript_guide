@@ -179,7 +179,7 @@ s = a;  //OK
       这样允许子类赋值给父类，但是不能赋值给其他的类（即使这个类有相同的类型）。
 ```
 
-## 6、泛型 
+## 6、泛型
 
 因为TypeScript是结构性的类型系统，类型参数只影响-- 使用其作为类型一部分的结果类型。
 
@@ -224,7 +224,7 @@ let reverse = function<U>(y: U): U {
 identity = reverse;  // Okay because (x: any)=>any matches (y: any)=>any
 ```
 
-## 7、高级主题
+## 7、高级主题 
 
 在TypeScript 中，有两种类型的兼容性： **子类型** 与** 赋值**。
 
