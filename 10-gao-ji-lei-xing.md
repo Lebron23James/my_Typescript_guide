@@ -84,5 +84,29 @@ padLeft原始版本的好处之一是允许我们传入原始类型。 这样做
 let indentedString = padLeft("Hello world", true); // errors during compilation
 ```
 
+----    
+
+如果一个值是联合类型，那么我们只能访问此联合类型的所有类型里共有的成员。
+
+```js
+interface Bird {
+    fly();
+    layEggs();
+}
+
+interface Fish {
+    swim();
+    layEggs();
+}
+
+function getSmallPet(): Fish | Bird {
+    // ...
+}
+
+let pet = getSmallPet();
+pet.layEggs(); // okay
+pet.swim();    // errors
+```
+
 
 
