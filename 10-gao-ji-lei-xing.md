@@ -66,23 +66,23 @@ padLeft("Hello world", 4); // returns "    Hello world"
 let indentedString = padLeft("Hello world", true); // 编译阶段通过，运行时报错
 ```
 
---- 
+---
 
 在传统的面向对象语言里，我们可能会将这两种类型抽象成有层级的类型。 这么做显然是非常清晰的，但同时也存在了过度设计。
 
 padLeft原始版本的好处之一是允许我们传入原始类型。 这样做的话使用起来既简单又方便。 如果我们就是想使用已经存在的函数的话，这种新的方式就不适用了。
 
---- 
+---
 
-联合类型
+**联合类型** 表示一个值可以是几种类型之一，我们用竖线分割每种类型：
 
+```js
+ function padLeft(value: string, padding: string | number) {  // 这里表示一个值可以为string类型 或者 number类型
+    // ...
+}
 
-
-
-
-
-
-
+let indentedString = padLeft("Hello world", true); // errors during compilation
+```
 
 
 
