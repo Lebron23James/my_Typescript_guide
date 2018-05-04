@@ -151,5 +151,18 @@ function isFish(pet: Fish | Bird): pet is Fish {
 
 以上例子中，`pet  is Fish` 就是类型谓词；其中参数名\(pet\)必须来自当前函数签名里的一个参数名。
 
+每当使用一些变量调用isFish 时，TypeScript会将变量缩减为那个具体的类型。只要这个类型与变量的原始类型是兼容的。
 
+```js
+// 'swim' 和 'fly' 调用都没有问题了
+
+if (isFish(pet)) {
+    pet.swim();
+}
+else {
+    pet.fly();
+}
+```
+
+TypeScript不仅知道在if 分支里pet 是Fish类型； 它还清楚再else 分支里一定不是Fish 类型，一定是Bird 类型。
 
