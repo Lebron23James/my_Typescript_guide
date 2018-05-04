@@ -108,5 +108,21 @@ pet.layEggs(); // okay
 pet.swim();    // errors
 ```
 
+## 3、类型保护与区分类型（Type Guards and Differentiating Types）
+
+JavaScript中常用来区分两个值的方法就是检查成员是否存在。
+
+```js
+let pet = getSmallPet();
+
+// 每一个成员访问都会报错 --- 因为我们只能访问联合类型中共同拥有的成员。
+if (pet.swim) {
+    pet.swim();
+}
+else if (pet.fly) {
+    pet.fly();
+}
+```
+
 
 
