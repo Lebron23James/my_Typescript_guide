@@ -206,5 +206,7 @@ function padLeft(value: string, padding: string | number) {
 }
 ```
 
+以上TypeScript类型保护只有两种形式被识别：`typeof v === "typename"`和`typeof v !== "typename"`
 
+“typename” 
 
