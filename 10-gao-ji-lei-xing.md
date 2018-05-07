@@ -208,5 +208,7 @@ function padLeft(value: string, padding: string | number) {
 
 以上TypeScript类型保护只有两种形式被识别：`typeof v === "typename"`和`typeof v !== "typename"`
 
-“typename” 
+“typename” 必须是 `number`  `string`  `boolean`  `symbol。`
+
+但是TypeScript并不会阻止你与其它字符串比较，语言不会把那些表达式识别为类型保护。
 
