@@ -170,7 +170,41 @@ TypeScript不仅知道在if 分支里pet 是Fish类型； 它还清楚再else �
 
 现在我们回过头来看看怎么使用联合类型书写`padLeft`代码。 我们可以像下面这样利用类型断言来写：
 
+```js
+function isNumber(x: any): x is number {
+    return typeof x === "number";
+}
 
+function isString(x: any): x is string {
+    return typeof x === "string";
+}
+
+function padLeft(value: string, padding: string | number) {
+    if (isNumber(padding)) {
+        return Array(padding + 1).join(" ") + value;
+    }
+    if (isString(padding)) {
+        return padding + value;
+    }
+    throw new Error(`Expected string or number, got '${padding}'.`);
+}
+```
+
+但是，以上例子中必须定义一个函数来判断类型是否为原始类型，这非常的不方便；
+
+在TypeScript中我们不必将 typeo x === 'number' 抽象成一个函数； 因为TypeScript可以将它识别为一个类型保护。
+
+```js
+function padLeft(value: string, padding: string | number) {
+    if (typeof padding === "number") {
+        return Array(padding + 1).join(" ") + value;
+    }
+    if (typeof padding === "string") {
+        return padding + value;
+    }
+    throw new Error(`Expected string or number, got '${padding}'.`);
+}
+```
 
 
 
