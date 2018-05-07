@@ -212,3 +212,7 @@ function padLeft(value: string, padding: string | number) {
 
 但是TypeScript并不会阻止你与其它字符串比较，语言不会把那些表达式识别为类型保护。
 
+> #### instanceof 类型保护
+
+
+
