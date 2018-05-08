@@ -214,5 +214,9 @@ function padLeft(value: string, padding: string | number) {
 
 > #### instanceof 类型保护
 
+instanceof 类型保护是通过构造函数来细化类型 一种方式。
+
+
+
 
 
