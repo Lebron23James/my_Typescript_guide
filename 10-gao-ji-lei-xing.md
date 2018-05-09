@@ -278,9 +278,36 @@ sn = null; // 可以
 sn = undefined; // error, 'undefined'不能赋值给'string | null'
 ```
 
-> #### 关于可选参数
+> #### 关于可选参数 和 可选属性
 
-使用了`--strictNullChecks `，可选参数会被自动的加上 ` |undefined `
+使用了`--strictNullChecks`，可选参数会被自动的加上` |undefined`
 
+```js
+function f(x: number, y?: number) {
+    return x + (y || 0);
+}
+f(1, 2);
+f(1);
+f(1, undefined);
+f(1, null); // error, 'null' is not assignable to 'number | undefined'
+```
 
+可选属性也会做同样的处理：
+
+```js
+class C {
+    a: number;
+    b?: number;
+}
+let c = new C();
+c.a = 12;
+c.a = undefined; // error, 'undefined' is not assignable to 'number'
+c.b = 13;
+c.b = undefined; // ok
+c.b = null; // error, 'null' is not assignable to 'number | undefined'
+```
+
+> #### 类型保护和类型断言
+
+由于可以为null 的类型是通过联合类型实现的，
 
