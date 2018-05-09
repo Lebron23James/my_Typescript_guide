@@ -252,5 +252,12 @@ if (padder instanceof StringPadder) {
 }
 ```
 
+instanceof 的右侧要求是一个构造函数，TypeScript 将细化为： 
 
+1. 此构造函数的prototype 属性的类型（如果类型不为any）
+2. 构造签名所返回的类型的联合
+
+## 4、可以为null 的类型
+
+TypeScript具有量总
 
