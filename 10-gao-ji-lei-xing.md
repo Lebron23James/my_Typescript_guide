@@ -265,5 +265,18 @@ TypeScript具有两种特殊的类型：null 和 undefined， 它们的值分别
 
 也就是说你阻止不了将它们赋值给其他类型。
 
+`--strictNullChecks`  标记可以解决此问题，也就是说当你声明一个变量的时候，它不会自动的包含null和undefined。
+
+你可以使用联合类型明确的包含null和undefined：
+
+```js
+let s = "foo";
+s = null; // 错误, 'null'不能赋值给'string'
+let sn: string | null = "bar";
+sn = null; // 可以
+
+sn = undefined; // error, 'undefined'不能赋值给'string | null'
+```
+
 
 
