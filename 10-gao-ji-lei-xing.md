@@ -280,7 +280,7 @@ sn = undefined; // error, 'undefined'不能赋值给'string | null'
 
 > #### 关于可选参数 和 可选属性
 
-使用了`--strictNullChecks`，可选参数会被自动的加上` |undefined`
+使用了`--strictNullChecks`，可选参数会被自动的加上`|undefined`
 
 ```js
 function f(x: number, y?: number) {
@@ -309,5 +309,56 @@ c.b = null; // error, 'null' is not assignable to 'number | undefined'
 
 > #### 类型保护和类型断言
 
-由于可以为null 的类型是通过联合类型实现的，
+由于可以为null 的类型是通过联合类型实现的，你需要使用类型保护来去除 null
+
+```js
+function f(sn: string | null): string {
+    if (sn == null) {
+        return "default";
+    }
+    else {
+        return sn;
+    }
+}
+```
+
+还可以使用短路运算符来去除null：
+
+```js
+function f(sn: string | null): string {
+    return sn || "default";
+}
+```
+
+如果编译器不能去除null 和 undefined，你可以使用类型断言手动去除null 和 undefined；
+
+语法为添加` ！` 后缀，identifier！从identifier 的类型里去除了null 和 undefined。
+
+```js
+function broken(name: string | null): string {
+  function postfix(epithet: string) {
+    return name.charAt(0) + '.  the ' + epithet; // error, 'name' is possibly null
+  }
+  name = name || "Bob";
+  return postfix("great");
+}
+
+function fixed(name: string | null): string {
+  function postfix(epithet: string) {
+    return name!.charAt(0) + '.  the ' + epithet; // ok
+  }
+  name = name || "Bob";
+  return postfix("great");
+}
+```
+
+本例使用了嵌套函数，因为编译器无法去除嵌套函数的null（除非是立即调用的函数表达式）。 
+
+因为它无法跟踪所有对嵌套函数的调用，尤其是你将内层函数做为外层函数的返回值。 
+
+如果无法知道函数在哪里被调用，就无法知道调用时`name`的类型。
+
+## 5、类型别名
+
+
 
