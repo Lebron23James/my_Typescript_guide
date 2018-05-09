@@ -252,12 +252,18 @@ if (padder instanceof StringPadder) {
 }
 ```
 
-instanceof 的右侧要求是一个构造函数，TypeScript 将细化为： 
+instanceof 的右侧要求是一个构造函数，TypeScript 将细化为：
 
 1. 此构造函数的prototype 属性的类型（如果类型不为any）
 2. 构造签名所返回的类型的联合
 
 ## 4、可以为null 的类型
 
-TypeScript具有量总
+TypeScript具有两种特殊的类型：null 和 undefined， 它们的值分别为null 和 undefined。
+
+默认情况下，类型检查器认为null 和 undefined 可以赋值任意类型； null和undefined是所有其他类型的一个有效值；
+
+也就是说你阻止不了将它们赋值给其他类型。
+
+
 
