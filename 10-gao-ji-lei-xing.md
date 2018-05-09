@@ -278,5 +278,9 @@ sn = null; // 可以
 sn = undefined; // error, 'undefined'不能赋值给'string | null'
 ```
 
+> #### 关于可选参数
+
+使用了`--strictNullChecks `，可选参数会被自动的加上 ` |undefined `
+
 
 
