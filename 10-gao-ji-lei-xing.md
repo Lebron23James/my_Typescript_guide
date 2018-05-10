@@ -435,5 +435,9 @@ declare function aliased(arg: Alias): Alias;
 declare function interfaced(arg: Interface): Interface;
 ```
 
+（2）另一个重要的区别就是类型别名不能被extends 和 implements （自己也不能extends 和 implements）；
 
+因为[软件中的对象应该对于扩展是开放的，但是对于修改是封闭的](https://en.wikipedia.org/wiki/Open/closed_principle)，你应该尽量去使用接口代替类型别名。
+
+（3）如果你无法通过接口来描述一个类型 且 需要使用联合类型或元组类型；这时通常会使用类型别名。
 
