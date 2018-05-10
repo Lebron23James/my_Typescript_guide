@@ -441,3 +441,50 @@ declare function interfaced(arg: Interface): Interface;
 
 （3）如果你无法通过接口来描述一个类型 且 需要使用联合类型或元组类型；这时通常会使用类型别名。
 
+## 6、字符串字面量类型
+
+字符串字面量类型允许你指定 字符串必须的固定值。
+
+在实际应用中，字符串字面量类型可以与联合类型、类型保护 和 类型别名很好的配合。
+
+通过结合使用这些特性，你可以实现类似枚举类型的字符串。
+
+```js
+type Easing = "ease-in" | "ease-out" | "ease-in-out";
+class UIElement {
+    animate(dx: number, dy: number, easing: Easing) {
+        if (easing === "ease-in") {
+            // ...
+        }
+        else if (easing === "ease-out") {
+        }
+        else if (easing === "ease-in-out") {
+        }
+        else {
+            // error! should not pass null or undefined.
+        }
+    }
+}
+
+let button = new UIElement();
+button.animate(0, 0, "ease-in");
+button.animate(0, 0, "uneasy"); // error: "uneasy" is not allowed here
+```
+
+你只能从三种允许的字符中选择其一来作为参数传递，传入其它值则会产生错误。
+
+字符串字面量还可以用来区分函数重载：
+
+```js
+function createElement(tagName: "img"): HTMLImageElement;
+function createElement(tagName: "input"): HTMLInputElement;
+// ... more overloads ...
+function createElement(tagName: string): Element {
+    // ... code goes here ...
+}
+```
+
+## 7、数字字面量类型
+
+
+
