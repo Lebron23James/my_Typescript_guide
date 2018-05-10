@@ -386,5 +386,37 @@ function getName(n: NameOrResolver): Name {
 type Container<T> = { value: T };
 ```
 
+**类型别名**也可以在属性里自己引用自己：
+
+```js
+type Tree<T> = {
+    value: T;
+    left: Tree<T>;
+    right: Tree<T>;
+}
+```
+
+类型别名与交叉类型一起使用，我们可以创造出十分古怪的类型：
+
+```js
+type LinkedList<T> = T & { next: LinkedList<T> };
+
+interface Person {
+    name: string;
+}
+
+var people: LinkedList<Person>;
+var s = people.name;
+var s = people.next.name;
+var s = people.next.next.name;
+var s = people.next.next.next.name;
+```
+
+然而，类型别名不能出现在声明右侧的任何地方。
+
+```js
+type Yikes = Array<Yikes>; // error
+```
+
 
 
