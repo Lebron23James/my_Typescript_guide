@@ -418,5 +418,22 @@ var s = people.next.next.next.name;
 type Yikes = Array<Yikes>; // error
 ```
 
+> #### 接口 vs 类型别名
+
+接口与类型别名之间的差别：
+
+（1） **接口**创建了一个新的名字，可以在其他任何地方使用；**类型别名**并不创建新的名字----- 例如，错误信息就不会使用别名。
+
+如下，在编译器中将鼠标悬停在interfaced 上，显示啊返回的是interface； 但悬停在aliased 上时，现实的却是对象字面量类型。
+
+```js
+type Alias = { num: number }
+interface Interface {
+    num: number;
+}
+declare function aliased(arg: Alias): Alias;
+declare function interfaced(arg: Interface): Interface;
+```
+
 
 
