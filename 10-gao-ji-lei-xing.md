@@ -332,7 +332,7 @@ function f(sn: string | null): string {
 
 如果编译器不能去除null 和 undefined，你可以使用类型断言手动去除null 和 undefined；
 
-语法为添加` ！` 后缀，identifier！从identifier 的类型里去除了null 和 undefined。
+语法为添加`！` 后缀，identifier！从identifier 的类型里去除了null 和 undefined。
 
 ```js
 function broken(name: string | null): string {
@@ -352,13 +352,39 @@ function fixed(name: string | null): string {
 }
 ```
 
-本例使用了嵌套函数，因为编译器无法去除嵌套函数的null（除非是立即调用的函数表达式）。 
+本例使用了嵌套函数，因为编译器无法去除嵌套函数的null（除非是立即调用的函数表达式）。
 
-因为它无法跟踪所有对嵌套函数的调用，尤其是你将内层函数做为外层函数的返回值。 
+因为它无法跟踪所有对嵌套函数的调用，尤其是你将内层函数做为外层函数的返回值。
 
 如果无法知道函数在哪里被调用，就无法知道调用时`name`的类型。
 
 ## 5、类型别名
+
+**类型别名**就是会给一个类型起个新的名字----来引用这个类型；类型别名不会新建一个类型。
+
+给原始类型起别名通常没有什么用，尽管可以作为文档的一种形式使用。
+
+```js
+type Name = string;
+type NameResolver = () => string;
+type NameOrResolver = Name | NameResolver;
+function getName(n: NameOrResolver): Name {
+    if (typeof n === 'string') {
+        return n;
+    }
+    else {
+        return n();
+    }
+}
+```
+
+**类型别名**有时和`接口`很像--- 可以作用于原始值、联合类型、元组等。
+
+**类型别名**可以是`泛型`： 我们可以添加类型参数，并且在别名声明的右侧传入。
+
+```js
+type Container<T> = { value: T };
+```
 
 
 
