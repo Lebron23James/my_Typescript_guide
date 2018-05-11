@@ -563,7 +563,61 @@ function area(s: Shape) {
 
 > #### 完整性检查
 
-当没有
+当没有涵盖所有可辨识联合的变化时，我们想让编译器可以通知我们。有两种方式可以实现：
+
+比如，如果我们添加了`Triangle`到`Shape`，我们同时还需要更新`area`:
+
+```js
+type Shape = Square | Rectangle | Circle | Triangle;
+function area(s: Shape) {
+    switch (s.kind) {
+        case "square": return s.size * s.size;
+        case "rectangle": return s.height * s.width;
+        case "circle": return Math.PI * s.radius ** 2;
+    }
+    // should error here - we didn't handle case "triangle"
+}
+```
+
+&lt;1&gt; 启用 --strictNullChecks 并且指定一个返回值类型。
+
+```js
+function area(s: Shape): number { // error: returns number | undefined
+    switch (s.kind) {
+        case "square": return s.size * s.size;
+        case "rectangle": return s.height * s.width;
+        case "circle": return Math.PI * s.radius ** 2;
+    }
+}
+```
+
+因为switch 没有包含所有的情况，所以TypeScript 认为这个函数有时候会返回 undefined。
+
+如果你明确的指定了返回值类型为Number ，会得到错误；因为实际的返回值的类型为 number \| undefined。
+
+然而，这种方法存在些微妙之处且`--strictNullChecks`对旧代码支持不好。
+
+&lt;2&gt; 使用 never 类型，编译器用它来进行完整性检查。
+
+```js
+function assertNever(x: never): never {
+    throw new Error("Unexpected object: " + x);
+}
+function area(s: Shape) {
+    switch (s.kind) {
+        case "square": return s.size * s.size;
+        case "rectangle": return s.height * s.width;
+        case "circle": return Math.PI * s.radius ** 2;
+        default: return assertNever(s); // error here if there are missing cases
+    }
+}
+```
+
+assertNever 检查 s 是否为 `never类型` --- 即为除去所有可能情况后剩下的类型。
+
+如果你忘记了某个 case， 那么s 将具有一个真实的类型，并且你会得到一个错误。
+
+## 9、多态的this类型
 
 
 
