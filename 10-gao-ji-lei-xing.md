@@ -517,9 +517,37 @@ function foo(x: number) {
 
 可辨识联合在函数式编程很有用处。
 
-一些语言会自动为你辨识联合；而TypeScript则是基于已有的JavaScript模式，它具有三个要素
+一些语言会自动为你辨识联合；而TypeScript则是基于已有的JavaScript模式，它具有三个要素：
 
+1. 具有普通的单例类型属性 --- 可辨识的特性；
+2. 一个类型别名包含了哪些类型的联合 --- 联合；
+3. 此属性上的类型保护；
 
+```js
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Rectangle {
+    kind: "rectangle";
+    width: number;
+    height: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+```
 
+首先，我们在上例子声明了将要联合的接口。每个接口都有 kind 属性，但有不同的字面量类型。
 
+**kind** 属性称作 **可辨识的特性 或 标签**； 其他属性则特定于某个接口。
+
+以上的各个接口是没有联系的，下面将它们联合到一起：
+
+```js
+typ shape = Square | Rectangle | Circle ;
+```
+
+现在我们使用可辨识的联合：
 
