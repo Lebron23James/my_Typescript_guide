@@ -551,3 +551,19 @@ typ shape = Square | Rectangle | Circle ;
 
 现在我们使用可辨识的联合：
 
+```js
+function area(s: Shape) {
+    switch (s.kind) {
+        case "square": return s.size * s.size;
+        case "rectangle": return s.height * s.width;
+        case "circle": return Math.PI * s.radius ** 2;
+    }
+}
+```
+
+> #### 完整性检查
+
+当没有
+
+
+
