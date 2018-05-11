@@ -486,5 +486,24 @@ function createElement(tagName: string): Element {
 
 ## 7、数字字面量类型
 
+TypeScript 还具有数字字面量类型。
 
+```js
+function rollDie(): 1 | 2 | 3 | 4 | 5 | 6 {
+    // ...
+}
+```
+
+我们很少直接这样使用，但可以在缩小范围查找bug 的时候使用：
+
+```js
+function foo(x: number) {
+    if (x !== 1 || x !== 2) {
+        //         ~~~~~~~
+        // Operator '!==' cannot be applied to types '1' and '2'.
+    }
+}
+```
+
+上面的比较检查是非法的，也就是说：当x与2 进行比较的时候，它的值必须是1 。
 
