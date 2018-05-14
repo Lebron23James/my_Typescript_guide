@@ -4,7 +4,7 @@
 
 ---
 
-## 1、交叉类型（intersection types）
+## 1、交叉类型（intersection types）  
 
 交叉类型是将现有的多个类型叠加到一起合并为一个类型 ，它包含了所需的所有类型的特性。
 
