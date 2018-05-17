@@ -671,5 +671,33 @@ let v = new ScientificCalculator(2)
 
 ## 10、索引类型
 
+使用索引类型，编译器就能够 检查使用了动态属性名的代码。
+
+例如：一个常见的JavaScript模式就是 从对象中选取互相的自己。
+
+```js
+function pluck(o, names) {
+    return names.map(n => o[n])
+}
+```
+
+下面例子就是在TypeScript中使用此函数，通过 **索引类型** 查询和 **索引访问** 操作符：
+
+```js
+function pluck<T, K extends keyof T>(o:T, name:K[]) :T[K][] {
+    return names.map(n => 0[n])
+} 
+interface Person {
+    name: string,
+    age: number
+}
+let person: Person{
+    name: 'tom',
+    age: 18
+}
+
+let strings: string[] = pluck(person, ['name']);  // string[]--- 字符串类型的数组['tom']
+```
+
 
 
