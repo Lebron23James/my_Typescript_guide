@@ -619,5 +619,57 @@ assertNever 检查 s 是否为 `never类型` --- 即为除去所有可能情况�
 
 ## 9、多态的this类型
 
-多态的this类型表示的是：某个包含类或接口的子类型。
+多态的this类型表示的是：某个包含类或接口的子类型。这被称作F-bounded 多态性。它能很容易的表示连贯接口间的继承。
+
+例如：在计算器的例子中，在每个操作之后返回this类型：
+
+```js
+class BasicCalculator {
+    public constructor(protected value: number = 0) { }
+    public currentValue(): number {
+        return this.value;
+    }
+    public add(operand: number): this {
+        this.value += operand;
+        return this;
+    }
+    public multiply(operand: number): this {
+        this.value *= operand;
+        return this;
+    }
+    // ... other operations go here ...
+}
+
+let v = new BasicCalculator(2)
+            .multiply(5)
+            .add(1)
+            .currentValue();
+```
+
+由于这个类使用了this类型，你可以继承它。新的类直接使用之前的方法，不需要做任何的改变。
+
+```js
+class ScientificCalculator extends BasicCalculator {
+    public constructor(value = 0) {
+        super(value);
+    }
+    public sin() {
+        this.value = Math.sin(this.value);
+        return this;
+    }
+    // ... other operations go here ...
+}
+
+let v = new ScientificCalculator(2)
+        .multiply(5)
+        .sin()
+        .add(1)
+        .currentValue();
+```
+
+正因为有this 类型，ScientificCalculator可以在继承BasicCalculator的同时，还保持接口的连贯性。
+
+## 10、索引类型
+
+
 
