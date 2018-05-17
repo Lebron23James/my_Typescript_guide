@@ -701,9 +701,9 @@ let strings: string[] = pluck(person, ['name']);  // string[]--- 字符串类型
 // 以上编译器会检查name 是否真的是person 的一个属性。
 ```
 
-新的类型操作符  `keyof T `**  ： 索引类型查询操作符**。
+新的类型操作符  `keyof T`**  ： 索引类型查询操作符**。
 
-  对于任何类型的T，keyof T 的结果为T 上已知的公共属性名的联合。例如：
+对于任何类型的T，keyof T 的结果为T 上已知的公共属性名的联合。例如：
 
 ```js
 let personProps: keyof Person ; // 'name' | 'age'
