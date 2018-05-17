@@ -716,12 +716,12 @@ keyof Person 这里是完全可以与 ‘name’ \| 'age' 相互替换的。
 所以我们在像`pluck`函数这类上下文里使用`keyof`，因为我们并不清楚可能出现的属性名，但编译器会检查是否传入正确属性名：
 
 ```js
-pluck(person, ['age', 'unknown']); // error, 'unknown' is not in 'name' | 'age' 
+pluck(person, ['age', 'unknown']); // error, 'unknown' is not in 'name' | 'age'
 ```
 
-（2）第二个新的类型操作符**` T[K]`**  ：**索引访问操作符**。
+（2）第二个新的类型操作符`T[K]`  ：**索引访问操作符**。
 
- 类型语法反映了表达式语法，这就意味着`person['name']`具有类型`Person['name'] `--- 在这里就是string类型。
+类型语法反映了表达式语法，这就意味着`person['name']`具有类型`Person['name']`--- 在这里就是string类型。
 
 ```js
 function getProperty<T, K extends keyof T>(o: T, name: K): T[K] {
@@ -729,7 +729,7 @@ function getProperty<T, K extends keyof T>(o: T, name: K): T[K] {
 }
 ```
 
-`getProperty`里的`o: T`和`name: K`，意味着`o[name]: T[K]`。 
+`getProperty`里的`o: T`和`name: K`，意味着`o[name]: T[K]`。
 
 当你返回`T[K]`的结果，编译器会实例化键的真实类型，因此`getProperty`的返回值类型会随着你需要的属性改变。
 
@@ -743,5 +743,55 @@ let unknown = getProperty(person, 'unknown'); // error, 'unknown' is not in 'nam
 
 typof 和 T\[K\] 与字符串索引签名进行交互。
 
-如果你有一个带有字符串索引签名的类型，那么`keyof T `会是string。 并且T\[string\]
+如果你有一个带有字符串索引签名的类型，那么`keyof T`会是string。 并且T\[string\] 为索引签名的类型。
+
+```js
+interface Map<T> {
+    [key: string]: T;
+}
+let keys: keyof Map<number>; // string
+let value: Map<number>['foo']; // number
+```
+
+## 11、映射类型
+
+一个常见的任务就是将一个已知的类型每个属性都变为可选的、或者是只读的：
+
+```js
+interface PersonPartial {
+    name?: string;
+    age?: number;
+}
+
+interface PersonReadonly {
+    readonly name: string;
+    readonly age: number;
+}    
+```
+
+TypeScript 提供了一种从旧类型中创建新类型的一种方式 ---** 映射类型**。
+
+```js
+type Readonly<T> = {
+    readonly [P in keyof T]: T[P];
+}
+type Partial<T> = {
+    [P in keyof T]?: T[P];
+}
+
+//然后使用
+type PersonPartial = Partial<Person>;
+type ReadonlyPerson = Readonly<Person>;
+```
+
+下面来分析一下最简单的映射类型和它的组成部分：
+
+```
+type Keys = 'option1' | 'option2';
+type Flags = { [K in keys]:boolean };
+```
+
+以上语法与索引签名的语法类似，内部使用了for...in... 。具有三个部分：
+
+
 
