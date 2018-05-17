@@ -696,7 +696,7 @@ let person: Person{
     age: 18
 }
 
-let strings: string[] = pluck(person, ['name']);  // string[]--- 字符串类型的数组['tom']
+let strings: string[] = pluck(person, ['name']);  // string[]--- 字符串类型的数组:['tom']
 ```
 
 
