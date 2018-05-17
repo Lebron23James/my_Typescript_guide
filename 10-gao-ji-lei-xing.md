@@ -701,7 +701,7 @@ let strings: string[] = pluck(person, ['name']);  // string[]--- 字符串类型
 // 以上编译器会检查name 是否真的是person 的一个属性。
 ```
 
-新的类型操作符  `keyof T`**  ： 索引类型查询操作符**。
+（1）第一个新的类型操作符  `keyof T`**  ： 索引类型查询操作符**。
 
 对于任何类型的T，keyof T 的结果为T 上已知的公共属性名的联合。例如：
 
@@ -709,5 +709,7 @@ let strings: string[] = pluck(person, ['name']);  // string[]--- 字符串类型
 let personProps: keyof Person ; // 'name' | 'age'
 ```
 
+keyof Person 这里是完全可以与 ‘name’ \| 'age' 相互替换的。
 
+不同之处在于，如果你添加新的属性‘address’ 到Peerson；那么keyof Person会自动变为`'name' | 'age' | 'address'`
 
