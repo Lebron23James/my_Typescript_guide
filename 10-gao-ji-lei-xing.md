@@ -713,3 +713,35 @@ keyof Person 这里是完全可以与 ‘name’ \| 'age' 相互替换的。
 
 不同之处在于，如果你添加新的属性‘address’ 到Peerson；那么keyof Person会自动变为`'name' | 'age' | 'address'`
 
+所以我们在像`pluck`函数这类上下文里使用`keyof`，因为我们并不清楚可能出现的属性名，但编译器会检查是否传入正确属性名：
+
+```js
+pluck(person, ['age', 'unknown']); // error, 'unknown' is not in 'name' | 'age' 
+```
+
+（2）第二个新的类型操作符**` T[K]`**  ：**索引访问操作符**。
+
+ 类型语法反映了表达式语法，这就意味着`person['name']`具有类型`Person['name'] `--- 在这里就是string类型。
+
+```js
+function getProperty<T, K extends keyof T>(o: T, name: K): T[K] {
+    return o[name]; // o[name] is of type T[K]
+}
+```
+
+`getProperty`里的`o: T`和`name: K`，意味着`o[name]: T[K]`。 
+
+当你返回`T[K]`的结果，编译器会实例化键的真实类型，因此`getProperty`的返回值类型会随着你需要的属性改变。
+
+```js
+let name: string = getProperty(person, 'name');
+let age: number = getProperty(person, 'age');
+let unknown = getProperty(person, 'unknown'); // error, 'unknown' is not in 'name' | 'age'
+```
+
+> #### 索引类型和字符串索引签名
+
+typof 和 T\[K\] 与字符串索引签名进行交互。
+
+如果你有一个带有字符串索引签名的类型，那么`keyof T `会是string。 并且T\[string\]
+
