@@ -4,7 +4,7 @@
 
 ---
 
-## 1、交叉类型（intersection types） 
+## 1、交叉类型（intersection types）
 
 交叉类型是将现有的多个类型叠加到一起合并为一个类型 ，它包含了所需的所有类型的特性。
 
@@ -791,5 +791,5 @@ type Keys = 'option1' | 'option2';
 type Flags = { [K in keys]:boolean };
 ```
 
-以上语法与索引签名的语法类似，内部使用了for...in... 。具有三个部分：
+以上语法与索引签名的语法类似，内部使用了for...in... 。
 
