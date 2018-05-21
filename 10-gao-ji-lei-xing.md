@@ -817,7 +817,7 @@ type PartialPerson =  { [P in keyof Person]?:Person[P] }
 
 ```js
 type Nullable<T> = { [P in keyof T]: T[p] | null }
-type Partial<T> =  { [P in keyof T]?:T[p] } 
+type Partial<T> =  { [P in keyof T]?:T[p] }
 ```
 
 
