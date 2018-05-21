@@ -820,5 +820,48 @@ type Nullable<T> = { [P in keyof T]: T[p] | null }
 type Partial<T> =  { [P in keyof T]?:T[p] }
 ```
 
+在这些例子里，属性列表是`keyof T`且结果类型是`T[P]`的变体。 这是使用通用映射类型的一个好模版。
+
+ 因为这类转换是[同态](https://en.wikipedia.org/wiki/Homomorphism)的，映射只作用于`T`的属性而没有其它的。 
+
+编译器知道在添加任何新属性之前可以拷贝所有存在的属性修饰符。
+
+ 例如，假设`Person.name`是只读的，那么`Partial<Person>.name`也将是只读的且为可选的。
+
+下面是另一个例子，`T[P]`被包装在`Proxy<T>`类里：
+
+```js
+type Proxy<T> = {
+    get(): T;
+    set(value: T): void;
+}
+type Proxify<T> = {
+    [P in keyof T]: Proxy<T[P]>;
+}
+function proxify<T>(o: T): Proxify<T> {
+   // ... wrap proxies ...
+}
+let proxyProps = proxify(props);
+```
+
+注意`Readonly<T>`和`Partial<T>`用处不小，因此它们与`Pick`和`Record`一同被包含进了TypeScript的标准库里：
+
+```js
+type Pick<T, K extends keyof T> = {
+    [P in K]: T[P];
+}
+type Record<K extends string, T> = {
+    [P in K]: T;
+}
+```
+
+`Readonly`，`Partial`和`Pick`是同态的，但`Record`不是。 因为`Record`并不需要输入类型来拷贝属性，所以它不属于同态：
+
+```js
+type ThreeStringProps = Record<'prop1' | 'prop2' | 'prop3', string>
+```
+
+非同态类型本质上会创建新的属性，因此它们不会从它处拷贝属性修饰符。
+
 
 
