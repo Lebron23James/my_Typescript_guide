@@ -4,7 +4,7 @@
 
 ---
 
-## 1、交叉类型（intersection types） 
+## 1、交叉类型（intersection types）
 
 交叉类型是将现有的多个类型叠加到一起合并为一个类型 ，它包含了所需的所有类型的特性。
 
@@ -791,5 +791,20 @@ type Keys = 'option1' | 'option2';
 type Flags = { [K in keys]:boolean };
 ```
 
-以上语法与索引签名的语法类似，内部使用了for...in... 。
+以上语法与索引签名的语法类似，内部使用了for...in... 。具有三个部分：
+
+1. 类型变量k ，它会依次绑定到每个属性；
+2. 字符串字面量联合的keys ，它包含了要迭代的属性名的集合；
+3. 属性的结果类型；
+
+以上例子的keys 是硬编码的属性名的列表，并且属性类型永远是boolean，因此这个映射类型等同于：
+
+```js
+type Flags = {
+    option1: boolean;
+    option2: boolean;
+}
+```
+
+
 
