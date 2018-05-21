@@ -806,5 +806,19 @@ type Flags = {
 }
 ```
 
+在真正的应用中，会根据一些已存在的类型、按照一定的方式转换字段。这就是keyof 和 索引访问类型 要做的事情：
+
+```js
+type NullablePerson = { [P in keyof Person]: Person[P] | null }
+type PartialPerson =  { [P in keyof Person]?:Person[P] }
+```
+
+它更有用的地方是可以有一些通用版本：
+
+```js
+type Nullable<T> = { [P in keyof T]: T[p] | null }
+type Partial<T> =  { [P in keyof T]?:T[p] } 
+```
+
 
 
