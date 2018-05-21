@@ -822,11 +822,11 @@ type Partial<T> =  { [P in keyof T]?:T[p] }
 
 在这些例子里，属性列表是`keyof T`且结果类型是`T[P]`的变体。 这是使用通用映射类型的一个好模版。
 
- 因为这类转换是[同态](https://en.wikipedia.org/wiki/Homomorphism)的，映射只作用于`T`的属性而没有其它的。 
+因为这类转换是[同态](https://en.wikipedia.org/wiki/Homomorphism)的，映射只作用于`T`的属性而没有其它的。
 
 编译器知道在添加任何新属性之前可以拷贝所有存在的属性修饰符。
 
- 例如，假设`Person.name`是只读的，那么`Partial<Person>.name`也将是只读的且为可选的。
+例如，假设`Person.name`是只读的，那么`Partial<Person>.name`也将是只读的且为可选的。
 
 下面是另一个例子，`T[P]`被包装在`Proxy<T>`类里：
 
@@ -863,5 +863,21 @@ type ThreeStringProps = Record<'prop1' | 'prop2' | 'prop3', string>
 
 非同态类型本质上会创建新的属性，因此它们不会从它处拷贝属性修饰符。
 
+> #### 由映射类型进行推断
 
+现在你了解了如何包装一个类型的属性，那么接下来就是如何拆包。 其实这也非常容易：
+
+```js
+function unproxify<T>(t: Proxify<T>): T {
+    let result = {} as T;
+    for (const k in t) {
+        result[k] = t[k].get();
+    }
+    return result;
+}
+
+let originalProps = unproxify(proxyProps);
+```
+
+注意这个拆包推断只适用于同态的映射类型。 如果映射类型不是同态的，那么需要给拆包函数一个明确的类型参数。
 
