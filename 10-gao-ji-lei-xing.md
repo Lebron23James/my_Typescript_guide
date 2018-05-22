@@ -1,4 +1,4 @@
-> ##  简介
+> ## 简介
 
 介绍几种TypeScript 中的高级类型
 
@@ -875,7 +875,6 @@ function unproxify<T>(t: Proxify<T>): T {
     }
     return result;
 }
-
 let originalProps = unproxify(proxyProps);
 ```
 
