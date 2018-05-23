@@ -14,15 +14,15 @@ let isDone:boolean = false;
 
 ### 2、数字 number
 
-在TypeScript 和 JavaScript中所有的数字都是浮点数，这些浮点数的类型是** number**。
+在TypeScript 和 JavaScript中**所有的数字都是浮点数**，这些浮点数的类型是** number**。
 
 除了支持十进制和十六进制字面量，TypeScript中还支持 ES6中引入的二进制和八进制字面量。
 
 ```js
-let decLiteral: number = 6;
-let hexLiteral: number = 0xf00d;
-let binaryLiteral: number = 0b1010;
-let octalLiteral: number = 0o774;
+let decLiteral: number = 6;                //十进制
+let hexLiteral: number = 0xf00d;           //十六进制 
+let binaryLiteral: number = 0b1010;        //二进制
+let octalLiteral: number = 0o774;          //八进制
 ```
 
 ### 3、字符串 **string**
@@ -34,7 +34,7 @@ let name:string = "Bob";
 name = "smith";
 ```
 
-还可以使用模板字符串【定义多行文本和内嵌表达式】；
+还可以使用**模板字符串**【定义多行文本和内嵌表达式】；
 
 ```js
 let name: string = "janny";
