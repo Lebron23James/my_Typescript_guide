@@ -172,7 +172,7 @@ let n:null = null;
 
 默认情况下，null和undefined 是所有类型的子类型。（可以把null和undefined赋值给number类型的变量）
 
-**注意：** 当你指定`--strictNullChecks `标记，null和undefined只能赋值给void和他们各自。这能避免很多问题。
+**注意：** 当你指定`--strictNullChecks`标记，null和undefined只能赋值给void和他们各自。这能避免很多问题。
 
 ### 10、never
 
@@ -205,14 +205,14 @@ function infinitLoop(): never {
 
 类型断言有两种形式，
 
-> 第一种：尖括号语法
+> 第一种：**尖括号语法**
 
 ```js
 let someValue: any = "this is a string";
 let stringLength: number = (<string>someValue).length;
 ```
 
-> 第二种：as语法
+> 第二种：**as语法**
 
 ```js
 let someValue: any = "this is a string";
