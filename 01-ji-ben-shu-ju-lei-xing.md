@@ -34,7 +34,7 @@ let name:string = "Bob";
 name = "smith";
 ```
 
-还可以使用**模板字符串**【定义多行文本和内嵌表达式】；
+还可以使用**模板字符串**【定义多行文本和内嵌表达式】
 
 ```js
 let name: string = "janny";
@@ -172,7 +172,7 @@ let n:null = null;
 
 默认情况下，null和undefined 是所有类型的子类型。（可以把null和undefined赋值给number类型的变量）
 
-**注意：** 当你指定_`--strictNullChecks`_` `标记，null和undefined只能赋值给void和他们各自。这能避免很多问题。
+**注意：** 当你指定`--strictNullChecks `标记，null和undefined只能赋值给void和他们各自。这能避免很多问题。
 
 ### 10、never
 
