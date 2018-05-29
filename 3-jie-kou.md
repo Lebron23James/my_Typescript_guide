@@ -6,7 +6,7 @@ TypeScript 的核心原则之一就是对值所具有的结构进行类型检查
 
 ---
 
-## 1、接口初探
+## 1、接口初探 
 
 ```js
 function printLabel ( labelObj: {label:string} ) {
