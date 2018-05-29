@@ -6,7 +6,7 @@ TypeScript 的核心原则之一就是对值所具有的结构进行类型检查
 
 ---
 
-## 1、接口初探 
+## 1、接口初探
 
 ```js
 function printLabel ( labelObj: {label:string} ) {
@@ -122,7 +122,7 @@ a = ro as number[];
 
 作为变量使用的话用 const， 作为属性使用的话用 readonly。
 
-## 4、额外的属性检查
+## 4、额外的属性检查 
 
 ```js
 interface SquareConfig {
