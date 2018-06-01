@@ -24,7 +24,7 @@ let z = 100;        // 函数可以 捕获 函数体外部的变量。
 
 ## 2、函数类型
 
-#### （1）为函数定义类型； 
+#### （1）为函数定义类型；
 
 我们可以给每个函数参数添加类型，也可以为函数本身添加返回值类型。
 
@@ -112,7 +112,7 @@ let result3 = buildName("Bob", "Adams");  // ah, just right
 
 #### （2）默认参数
 
-在TypeScript 中，我们可以给参数指定一个默认值--- 当用户没有传递这个参数 或 传递的值时undefined 的时候生效。
+在TypeScript 中，我们可以给参数指定一个默认值--- 当用户**没有传递这个参数 **或** 传递的值时undefined** 的时候生效。
 
 ```js
 function buildName(firstName: string, lastName = "Smith") {
