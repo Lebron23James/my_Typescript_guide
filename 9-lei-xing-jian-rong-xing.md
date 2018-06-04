@@ -1,6 +1,6 @@
 > ## 简介
 
-TypeScript 里的类型兼容性是基于结构子类型的。
+TypeScript 里的类型兼容性是基于**结构子类型**的。
 
 结构类型是一种只使用其成员来描述类型的方式。它正好与名义类型形成对比。
 
@@ -224,7 +224,7 @@ let reverse = function<U>(y: U): U {
 identity = reverse;  // Okay because (x: any)=>any matches (y: any)=>any
 ```
 
-## 7、高级主题 
+## 7、高级主题
 
 在TypeScript 中，有两种类型的兼容性： **子类型** 与** 赋值**。
 
