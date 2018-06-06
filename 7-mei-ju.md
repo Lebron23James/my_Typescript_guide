@@ -45,6 +45,8 @@ function respond(recipient: string, message: Response): void {
 respond("Princess Caroline", Response.Yes)
 ```
 
+----- 
+
 不带初始化器的枚举放置的位置：**第一的位置** && **使用数字常量或者其它常量初始化了的枚举后面**。
 
 以下情况是不被允许的：
