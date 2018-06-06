@@ -45,7 +45,7 @@ function respond(recipient: string, message: Response): void {
 respond("Princess Caroline", Response.Yes)
 ```
 
------ 
+---
 
 不带初始化器的枚举放置的位置：**第一的位置** && **使用数字常量或者其它常量初始化了的枚举后面**。
 
@@ -72,11 +72,11 @@ enum Direction {
 
 由于字符串枚举没有自增长的行为，字符串枚举可以很好的序列化。
 
-字符串枚举允许你提供一个运行时有意义的并且可读的值，独立于枚举成员的名字。
+字符串枚举允许你提供一个运行时有意义的并且可读的值，**独立**于枚举成员的名字。
 
 ## 3、异构枚举
 
-从技术的角度来说，枚举可以混合字符串和数字成员，除非你真的想利用JavaScript运行时的行为，否则不建议这么做。
+从技术的角度来说，枚举可以混合字符串和数字成员，除非你真的想利用~~JavaScript运行时的行为~~，否则不建议这么做。
 
 ```js
 enum BooleanLikeHeterogeneousEnum {
