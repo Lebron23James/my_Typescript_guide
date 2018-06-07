@@ -46,7 +46,7 @@ let zoo: Animal[] = [new Rhino(), new Elephant(), new Snake()];
 
 ## 3、上下文类型
 
-TypeScript 类型推论也可按照相反的方向进行。 当表达式的类型与所处的位置相关的时候，叫做“按上下文归类”。
+TypeScript 类型推论也可按照相反的方向进行。 当**表达式的类型与所处的位置相关**的时候，叫做“按上下文归类”。
 
 ```js
 window.onmousedown = function(mouseEvent) {
@@ -58,7 +58,7 @@ window.onmousedown = function(mouseEvent) {
 
 --
 
-若上下文类型表达式包含了明确的类型信息（有明确的参数类型注解），上下文的类型被忽略。就不会报错了。
+若上下文类型表达式包含了明确的类型信息（**有明确的参数类型注解**），上下文的类型被忽略。就不会报错了。
 
 ```js
 window.onmousedown = function(mouseEvent: any) {
