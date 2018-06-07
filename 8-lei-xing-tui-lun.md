@@ -84,5 +84,5 @@ function createZoo(): Animal[] {
 }
 ```
 
-以上最佳通用类型有四个候选者： Animal、Rhino、Elephant、Snake； 其中Animal会被作为最佳通用类型。
+以上最佳通用类型有四个候选者： Animal、Rhino、Elephant、Snake； 其中Animal会被作为最佳通用类型 。
 
