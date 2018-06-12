@@ -8,7 +8,7 @@ TypeScript 里的类型兼容性是基于**结构子类型**的。
 
 ---
 
-## 1、基础
+## 1、基础 
 
 ```js
 interface Named {
